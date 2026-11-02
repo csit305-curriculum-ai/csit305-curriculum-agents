@@ -63,8 +63,19 @@ def parse_math_rows(text: str) -> list[dict]:
     return records
 
 
+def n_pages(path: Path) -> int:
+    out = subprocess.run(["pdfinfo", str(path)], capture_output=True, text=True, check=True).stdout
+    return int(re.search(r"^Pages:\s+(\d+)", out, re.M).group(1))
+
+
 def parse_math(path: Path) -> list[dict]:
-    recs = parse_math_rows(pdf_text(path))
+    # Parse page by page: preserves page numbers (Doc 3 corpus metadata) and source boundaries.
+    # Whole-document parsing merged blocks across form feeds and lost 27 rows (TESTING.md, audit fix).
+    recs = []
+    for pg in range(1, n_pages(path) + 1):
+        for r in parse_math_rows(pdf_text(path, pg, pg)):
+            r["page"] = pg
+            recs.append(r)
     seen, out = set(), []
     for r in recs:  # the source repeats an outcome on several lesson rows; keep distinct text
         key = (r["outcome_id"], r["text"])
@@ -80,34 +91,63 @@ def parse_timss(path: Path) -> list[dict]:
     out = []
     m = re.search(r"Exhibit 1: Mathematics Topics for Grade 4(.*?)Exhibit 2:", t, re.S)
     if m:
-        out.append({"subject": "maths", "grades": [4], "domain": "TIMSS Exhibit 1", "outcome_id": "TIMSS-MA-G4", "text": clean(m.group(1))})
+        out.append({"subject": "maths", "grades": [4], "domain": "TIMSS Exhibit 1", "outcome_id": "TIMSS-MA-G4", "text": clean(m.group(1)), "page": None})
     s = re.search(r"(The Science Curriculum in Primary and Lower Secondary Grades.*?)Exhibit 4:", t, re.S)
     if s:
-        out.append({"subject": "science", "grades": [1, 2, 3, 4], "domain": "TIMSS Exhibit 3 (Cycle 1)", "outcome_id": "TIMSS-SC-C1", "text": clean(s.group(1))})
+        out.append({"subject": "science", "grades": [1, 2, 3, 4], "domain": "TIMSS Exhibit 3 (Cycle 1)", "outcome_id": "TIMSS-SC-C1", "text": clean(s.group(1)), "page": None})
     return out
 
 
+# role "evidence" = indexed for generation; "context" = parsed for the paper's background only.
+# Doc 3: "the TIMSS chapter is contextual evidence and is not a substitute for those files" (DEC 012).
 SOURCES = {
-    "moe_math_scope_sequence_g1-12.pdf": parse_math,
-    "timss2023_uae_encyclopedia.pdf": parse_timss,
-    # moe_science_framework_2019-20.pdf: Grades 1-4 outcomes are Arabic-only in this file, so it is
-    # fetched and hashed but not indexed (see DESIGN_DECISIONS.md DEC 007).
+    "moe_math_scope_sequence_g1-12.pdf": (parse_math, "evidence"),
+    "timss2023_uae_encyclopedia.pdf": (parse_timss, "context"),
+    # moe_science_framework_2019-20.pdf: Grades 1-4 outcomes are Arabic-only (DEC 007); hashed, not parsed.
 }
+MANIFEST = ROOT / "corpus" / "manifest.json"
+
+
+def verify_sources(raw: Path = RAW, manifest: Path = MANIFEST) -> dict:
+    """Doc 3 T7: a source-file hash mismatch blocks use until the source is revalidated."""
+    import json as _j
+    expected = _j.loads(manifest.read_text())["files"]
+    for fname, meta in expected.items():
+        got = sha256(raw / fname)
+        if got != meta["sha256"]:
+            raise RuntimeError(f"Source hash mismatch for {fname}: expected {meta['sha256'][:12]}, got {got[:12]}. Revalidate before use.")
+    return expected
 
 
 def build(raw: Path = RAW, out: Path = OUT) -> list[dict]:
     records = []
-    for fname, parser in SOURCES.items():
+    for fname, (parser, role) in SOURCES.items():
         path = raw / fname
         h = sha256(path)
         for i, r in enumerate(parser(path)):
-            r.update({"doc_id": fname.rsplit(".", 1)[0], "source_file": fname, "file_sha256": h, "record_no": i})
+            r.update({"doc_id": fname.rsplit(".", 1)[0], "source_file": fname, "file_sha256": h, "record_no": i, "role": role})
             records.append(r)
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w") as f:
         for r in records:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    write_inventory(records)
     return records
+
+
+def write_inventory(records: list[dict]) -> None:
+    """Outcome inventory (IDs, grade, subject, domain, page; no source wording, see DEC 011)."""
+    import csv
+    path = ROOT / "corpus" / "processed" / "outcome_inventory.csv"
+    with path.open("w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["outcome_id", "subject", "grades", "domain", "source_file", "page", "role"])
+        for r in records:
+            w.writerow([r["outcome_id"], r["subject"], "|".join(map(str, r["grades"])), r["domain"], r["source_file"], r.get("page"), r["role"]])
+
+
+def evidence_records(records: list[dict]) -> list[dict]:
+    return [r for r in records if r.get("role") == "evidence"]
 
 
 if __name__ == "__main__":

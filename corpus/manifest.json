@@ -1,0 +1,20 @@
+{
+ "accessed": "2026-11-02",
+ "files": {
+  "moe_math_scope_sequence_g1-12.pdf": {
+   "sha256": "e878c0c39a2f58aef36d8ff423472302f5ac268ab2bdb56be2c396fddb8234cf",
+   "role": "evidence",
+   "pages": 144
+  },
+  "moe_science_framework_2019-20.pdf": {
+   "sha256": "483a7be74c4f240d99aea23bb5168fd3845bceb976541b1d3ff6357afe8fe43e",
+   "role": "not_indexed",
+   "pages": 86
+  },
+  "timss2023_uae_encyclopedia.pdf": {
+   "sha256": "5cddac03fe5b114960a5bfcea696cda3a90f991bcbe88991571a291274d6af59",
+   "role": "context",
+   "pages": 13
+  }
+ }
+}

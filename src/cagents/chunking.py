@@ -30,10 +30,12 @@ class Chunk:
     file_sha256: str
     outcome_ids: list[str] = field(default_factory=list)
     n_tokens: int = 0
+    pages: list[int] = field(default_factory=list)
 
     def metadata(self) -> dict:
         md = {"subject": self.subject, "source_file": self.source_file, "file_sha256": self.file_sha256,
-              "outcome_ids": ",".join(self.outcome_ids), "n_tokens": self.n_tokens}
+              "outcome_ids": ",".join(self.outcome_ids), "n_tokens": self.n_tokens,
+              "pages": ",".join(map(str, self.pages))}
         for g in range(1, 5):  # Chroma metadata cannot hold lists, so one boolean per grade
             md[f"g{g}"] = g in self.grades
         return md
@@ -61,14 +63,19 @@ def chunk_records(records: list[dict], tok: Tokenizer, size: int = CHUNK_TOKENS,
     for (src, subject, grades), recs in groups.items():
         text = "\n".join(f"[{r['outcome_id']}] ({r['domain']}) {r['text']}" for r in recs)
         ids = tok.encode(text)
+        pages_of: dict[str, set] = {}
+        for r in recs:
+            if r.get("page") is not None:
+                pages_of.setdefault(r["outcome_id"], set()).add(r["page"])
         gtag = "g" + "".join(map(str, grades))
         for n, (a, b) in enumerate(window(ids, size, overlap)):
             piece = tok.decode(ids[a:b]).strip()
+            oids = sorted(set(re.findall(r"\[([A-Z]+-[\w.\-]+)\]", piece)))
             chunks.append(Chunk(
                 chunk_id=f"{src.split('_')[0]}-{subject[:2]}-{gtag}-{n:03d}",
                 text=piece, subject=subject, grades=list(grades), source_file=src,
                 file_sha256=recs[0]["file_sha256"],
-                outcome_ids=sorted(set(re.findall(r"\[([A-Z]+-[\w.\-]+)\]", piece))), n_tokens=b - a))
+                outcome_ids=oids, n_tokens=b - a, pages=sorted({p for o in oids for p in pages_of.get(o, ())})))
     return chunks
 
 
