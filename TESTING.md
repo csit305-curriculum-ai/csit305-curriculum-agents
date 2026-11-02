@@ -2,7 +2,7 @@
 
 Run with `.venv/bin/python -m pytest -v`. The suite makes no API calls; the real-index tests are skipped if `index/` has not been built.
 
-## Run 1: 2 Nov 2026, 10:46 UTC+4, commit c72a3c8, Python 3.11.18, pytest 9.2.0
+## Run 1: 2 Nov 2026, 10:46 UTC+4, commit 07b5ac2, Python 3.11.18, pytest 9.2.0
 **Result: 25 passed, 0 failed, 0 skipped (6.9 s).**
 
 | Test | Covers | Written by | Result |
@@ -31,7 +31,7 @@ Run with `.venv/bin/python -m pytest -v`. The suite makes no API calls; the real
 **Failures, fixes and retests.** No pytest test has failed so far, so there is no failure → fix → retest cycle to report yet. Because the tests and the code came from the same AI assistant, a clean first run is weak evidence. The manual tests below are the independent check.
 
 Problems found outside pytest and fixed:
-- Commit 4495a0c accidentally tracked `corpus/processed/records.jsonl`, which contains extracted MoE text. Fixed in 505f3db (untracked and gitignored, DEC 011).
+- Commit 3ea32c4 accidentally tracked `corpus/processed/records.jsonl`, which contains extracted MoE text. Fixed in e9a3357 (untracked and gitignored, DEC 011).
 - The moe.gov.ae source links returned 404. The fetch script now uses Wayback copies (SOURCES.md).
 
 ## Gate check on draft tasks (TEST 004), 2 Nov 2026
@@ -61,20 +61,20 @@ A GenAI assistant re-read Doc 3 v0.2 in full and checked the repo against it. Mi
 
 | # | Failure found | Fix (commit) | Retest |
 |---|---|---|---|
-| F1 | TIMSS indexed as generation evidence, against Doc 3 Corpus | Marked context only, not indexed (2075096, DEC 012) | `test_timss_context_never_retrieved` passes (test renamed under SRC 002) |
-| F2 | No page numbers in records or packets (Doc 3 metadata list) | Per-page parsing; chunks carry `pages` (2075096) | `test_outcome_chunk_carries_pages` passes |
-| F3 | Whole-document parsing silently lost 27 outcome rows across page breaks (408 vs 435) | Per-page parsing (2075096) | 435 evidence rows; inventory in corpus/processed/outcome_inventory.csv |
-| F4 | No source-hash check before use (Doc 3 T7 "hash mismatch blocks use") | `verify_sources()` against corpus/manifest.json in build, freeze, run (2075096) | Called on every build/freeze/run; M2 manual test still to do |
-| F5 | Gate was similarity-only, no outcome inventory, no conflicting-request check | Inventory gate + conflict check (4c45351, DEC 013) | 6 tests in test_not_covered.py pass |
-| F6 | Packets were retrieved once per run, not frozen and re-checked on timed requests | `run freeze` writes packets/; each timed B request re-retrieves and `assert_reproduces` (4c45351, 7549ba6) | `test_live_retrieval_must_reproduce_frozen_packet` passes; 12/12 maths packets reproduced in a mock run |
-| F7 | Schema lacked answer keys, objective IDs, lesson sequence and feedback templates | Four-section schema (a697df5, DEC 014) | 10 schema tests pass |
-| F8 | Timeout retry had no delay; other API errors crashed the run | 5 s delay; connection/429/5xx treated the same (a697df5) | `test_timeout_one_bounded_retry_with_delay_then_incomplete` passes |
-| F9 | Log lacked requested model, pricing snapshot, job/node IDs, word count, retrieval latency in the total | Added (a697df5) | `test_retry_once_then_success_counts_both` checks the fields |
-| F10 | A/B order not randomised | Seeded shuffle per task × repeat block (7549ba6) | Mock run showed both orders |
-| F11 | No interface for the checker (Doc 3 T4 "Pack to checker") | `checker_inputs.checker_rows` (a697df5) | `test_checker_rows_include_cited_passages_and_invalid_ids` passes |
+| F1 | TIMSS indexed as generation evidence, against Doc 3 Corpus | Marked context only, not indexed (463a18f, DEC 012) | `test_timss_context_never_retrieved` passes (test renamed under SRC 002) |
+| F2 | No page numbers in records or packets (Doc 3 metadata list) | Per-page parsing; chunks carry `pages` (463a18f) | `test_outcome_chunk_carries_pages` passes |
+| F3 | Whole-document parsing silently lost 27 outcome rows across page breaks (408 vs 435) | Per-page parsing (463a18f) | 435 evidence rows; inventory in corpus/processed/outcome_inventory.csv |
+| F4 | No source-hash check before use (Doc 3 T7 "hash mismatch blocks use") | `verify_sources()` against corpus/manifest.json in build, freeze, run (463a18f) | Called on every build/freeze/run; M2 manual test still to do |
+| F5 | Gate was similarity-only, no outcome inventory, no conflicting-request check | Inventory gate + conflict check (ed738ef, DEC 013) | 6 tests in test_not_covered.py pass |
+| F6 | Packets were retrieved once per run, not frozen and re-checked on timed requests | `run freeze` writes packets/; each timed B request re-retrieves and `assert_reproduces` (ed738ef, 4fffe11) | `test_live_retrieval_must_reproduce_frozen_packet` passes; 12/12 maths packets reproduced in a mock run |
+| F7 | Schema lacked answer keys, objective IDs, lesson sequence and feedback templates | Four-section schema (9f27336, DEC 014) | 10 schema tests pass |
+| F8 | Timeout retry had no delay; other API errors crashed the run | 5 s delay; connection/429/5xx treated the same (9f27336) | `test_timeout_one_bounded_retry_with_delay_then_incomplete` passes |
+| F9 | Log lacked requested model, pricing snapshot, job/node IDs, word count, retrieval latency in the total | Added (9f27336) | `test_retry_once_then_success_counts_both` checks the fields |
+| F10 | A/B order not randomised | Seeded shuffle per task × repeat block (4fffe11) | Mock run showed both orders |
+| F11 | No interface for the checker (Doc 3 T4 "Pack to checker") | `checker_inputs.checker_rows` (9f27336) | `test_checker_rows_include_cited_passages_and_invalid_ids` passes |
 
-- **First retest after F1–F5 (at 2075096, before the test rewrite):** 13 failed, 12 passed. All failures came from tests written for the old API (`exclude_outcomes`, old schema, similarity-only gate). Tests rewritten to Doc 3 behaviour, not loosened.
-- **Final retest (beed8ed):** 36 passed.
+- **First retest after F1–F5 (at 463a18f, before the test rewrite):** 13 failed, 12 passed. All failures came from tests written for the old API (`exclude_outcomes`, old schema, similarity-only gate). Tests rewritten to Doc 3 behaviour, not loosened.
+- **Final retest (1558338):** 36 passed.
 - **The live smoke test (TEST 005) used the old schema and is now stale.** Re-run it once before the pilot (about US$0.004).
 - **Disclosure:** TEST 005 sent MoE excerpts to the DeepSeek API before the source terms were confirmed (Doc 3 Corpus). No further API calls were made.
 
@@ -102,3 +102,5 @@ These are deliberately not AI-written. Record the date, commit SHA and result fo
 | Test change | `test_timss_not_indexed_so_science_refused` replaced by `test_grade4_science_outcome_retrieved`, `test_timss_context_never_retrieved`, `test_unknown_science_outcome_refused` (the old test asserted the gap itself) |
 | Retest | 38 passed; `run freeze` 24/24 ok |
 | TEST 001 (Science, B only) | `SC-4.4.3.2.2` removed from a copy (1 record); 10/10 refused with the expected Grade 4 Science message, no generation call. C pending |
+
+Note (2 Nov 2026): commit author emails were rewritten before the first push, so every SHA changed. All SHAs in these records refer to the rewritten history on GitHub (https://github.com/csit305-curriculum-ai/csit305-curriculum-agents).
