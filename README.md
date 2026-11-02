@@ -48,6 +48,21 @@ cd src && ../.venv/bin/python -m cagents.run --tasks G3M-P1 --conditions A B --r
 ```
 The full experiment (20 tasks × 3 conditions × 3 repeats) has **not** been run.
 
+## Demo (Week 6)
+`demo/app.py` is a Streamlit app. For a task from `tasks.yaml` it runs **live local retrieval** (bge-m3 + Chroma, top-5) and the
+**coverage gate** (DEC 013), shows the chunks with scores, checks the live packet hash against the frozen packet, then shows
+Condition A and B outputs side by side. Outputs are **replayed** from recorded runs (`runs/smoke_2`, `runs/smoke`), clearly
+labelled, and **no API call is made**. Tasks with no recorded run say "No recorded run". The TEST001 entry replays the
+signature failure test (B refused 10/10). Condition C shows "not yet in repo (Manzi)".
+```bash
+uv pip install --python .venv -r requirements-demo.txt
+.venv/bin/streamlit run demo/app.py            # Windows: .venv\Scripts\streamlit run demo\app.py
+# opens http://localhost:8501
+```
+Needs the index built first (see Setup). Full lesson text comes from `runs/*/trace.jsonl`, which is kept locally (MoE text, git-ignored);
+without it the app shows status/tokens from `summary.csv` only. `-- --live` enables new DeepSeek calls; it is off by default and
+must not be used until the MoE licence is confirmed. Screenshots: `docs/demo/`.
+
 ## Limitations (current state)
 - Science outcomes come from the MoE Science Standards 2017 (English G3–4 outcomes, DEC 016). TIMSS is context only (DEC 012). All 24 tasks pass the gate.
 - Run order: `python -m cagents.build_index`, then `python -m cagents.run freeze`, then `python -m cagents.run run ...`.
