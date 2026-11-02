@@ -9,3 +9,4 @@ corpus/raw/
 index/
 runs/*.jsonl
 !runs/smoke/
+corpus/processed/records.jsonl
