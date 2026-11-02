@@ -10,3 +10,5 @@ index/
 runs/*.jsonl
 !runs/smoke/
 corpus/processed/records.jsonl
+runs/**/trace.jsonl
+runs/**/bundle_*.json
