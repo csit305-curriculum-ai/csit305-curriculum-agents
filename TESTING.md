@@ -119,3 +119,6 @@ These are deliberately not AI-written. Record the date, commit SHA and result fo
 | TEST 001 (Science, B only) | `SC-4.4.3.2.2` removed from a copy (1 record); 10/10 refused with the expected Grade 4 Science message, no generation call. C pending |
 
 Note (2 Nov 2026): commit author emails were rewritten before the first push, so every SHA changed. All SHAs in these records refer to the rewritten history on GitHub (https://github.com/csit305-curriculum-ai/csit305-curriculum-agents).
+
+## Current test count (2 Nov 2026, after PLAN C stubs)
+`pytest --collect-only`: 47 tests collected. `pytest`: 38 passed, 9 skipped. The 9 skipped tests are placeholder stubs for condition C (Manzi) and test nothing yet.
