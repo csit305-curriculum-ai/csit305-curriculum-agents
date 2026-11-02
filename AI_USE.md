@@ -21,3 +21,5 @@ The commits do not mean Sanjay wrote the code by hand.
 | Docs | AI draft | Cross-checked against Doc 3 T3/T4/T8/T9 | Edit into your own words where you will be marked on them |
 
 The tests were written by the same assistant that wrote the code, so they share its blind spots. The independent check is the manual test list in TESTING.md.
+
+| Alignment audit (2 Nov 2026) | AI | Doc 3 re-read in full; 11 mismatches fixed with tests (TESTING.md F1–F11) | Group to approve DEC 012–015; the audit is the assistant checking its own work |

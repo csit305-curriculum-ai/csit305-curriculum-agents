@@ -49,7 +49,8 @@ cd src && ../.venv/bin/python -m cagents.run --tasks G3M-P1 --conditions A B --r
 The full experiment (20 tasks × 3 conditions × 3 repeats) has **not** been run.
 
 ## Limitations (current state)
-- English Grade 3–4 Science outcomes are missing; science is grounded only in a TIMSS Cycle 1 summary (see `corpus/SOURCES.md`).
+- English Grade 3–4 Science outcomes are missing. TIMSS is context only (DEC 012), so every science task is refused until a source is found (see `corpus/SOURCES.md`).
+- Run order: `python -m cagents.build_index`, then `python -m cagents.run freeze`, then `python -m cagents.run run ...`.
 - Maths text extraction is heuristic. Some rows lose words that wrap across blank lines, chapter and lesson titles are mixed into the outcome text, and some outcome IDs in the source are misnumbered (e.g. `MA-5.5.9.1` appears inside the Grade 4 block).
 - The similarity threshold was calibrated on only 27 hand-written queries. It refuses 3 of the 24 draft tasks, including one maths task (G4M-05) whose topic is in the corpus (see TESTING.md).
 - The NLI checker, condition C, scoring and statistics are not implemented here.

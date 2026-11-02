@@ -56,6 +56,34 @@ Each of the 24 tasks in tasks.yaml was run through `Index.retrieve(topic, subjec
   - B cited only one chunk.
 - **Files:** runs/smoke/summary.csv and runs/smoke/trace_redacted.jsonl. The full trace is kept locally only.
 
+## Alignment audit against Doc 3 (2 Nov 2026, 10:51–12:00 UTC+4)
+A GenAI assistant re-read Doc 3 v0.2 in full and checked the repo against it. Mismatches found, fixed and retested:
+
+| # | Failure found | Fix (commit) | Retest |
+|---|---|---|---|
+| F1 | TIMSS indexed as generation evidence, against Doc 3 Corpus | Marked context only, not indexed (2075096, DEC 012) | `test_timss_not_indexed_so_science_refused` passes |
+| F2 | No page numbers in records or packets (Doc 3 metadata list) | Per-page parsing; chunks carry `pages` (2075096) | `test_outcome_chunk_carries_pages` passes |
+| F3 | Whole-document parsing silently lost 27 outcome rows across page breaks (408 vs 435) | Per-page parsing (2075096) | 435 evidence rows; inventory in corpus/processed/outcome_inventory.csv |
+| F4 | No source-hash check before use (Doc 3 T7 "hash mismatch blocks use") | `verify_sources()` against corpus/manifest.json in build, freeze, run (2075096) | Called on every build/freeze/run; M2 manual test still to do |
+| F5 | Gate was similarity-only, no outcome inventory, no conflicting-request check | Inventory gate + conflict check (4c45351, DEC 013) | 6 tests in test_not_covered.py pass |
+| F6 | Packets were retrieved once per run, not frozen and re-checked on timed requests | `run freeze` writes packets/; each timed B request re-retrieves and `assert_reproduces` (4c45351, 7549ba6) | `test_live_retrieval_must_reproduce_frozen_packet` passes; 12/12 maths packets reproduced in a mock run |
+| F7 | Schema lacked answer keys, objective IDs, lesson sequence and feedback templates | Four-section schema (a697df5, DEC 014) | 10 schema tests pass |
+| F8 | Timeout retry had no delay; other API errors crashed the run | 5 s delay; connection/429/5xx treated the same (a697df5) | `test_timeout_one_bounded_retry_with_delay_then_incomplete` passes |
+| F9 | Log lacked requested model, pricing snapshot, job/node IDs, word count, retrieval latency in the total | Added (a697df5) | `test_retry_once_then_success_counts_both` checks the fields |
+| F10 | A/B order not randomised | Seeded shuffle per task × repeat block (7549ba6) | Mock run showed both orders |
+| F11 | No interface for the checker (Doc 3 T4 "Pack to checker") | `checker_inputs.checker_rows` (a697df5) | `test_checker_rows_include_cited_passages_and_invalid_ids` passes |
+
+- **First retest after F1–F5 (at 2075096, before the test rewrite):** 13 failed, 12 passed. All failures came from tests written for the old API (`exclude_outcomes`, old schema, similarity-only gate). Tests rewritten to Doc 3 behaviour, not loosened.
+- **Final retest (beed8ed):** 36 passed.
+- **The live smoke test (TEST 005) used the old schema and is now stale.** Re-run it once before the pilot (about US$0.004).
+- **Disclosure:** TEST 005 sent MoE excerpts to the DeepSeek API before the source terms were confirmed (Doc 3 Corpus). No further API calls were made.
+
+## TEST 001 (provisional Maths variant, DEC 015), 2 Nov 2026
+- **Setup:** Removed MA-4.2.5.1 from a copy of the evidence records (1 record removed); the copy has neither the record nor the ID in chunk text. Original records sha256 5ffb7c39…, modified b8ca9ba5….
+- **Result:** 10/10 B attempts returned `insufficient_evidence` with the exact Doc 3 message (Maths wording), retrieved no IDs, and made no generation call.
+- **Files:** runs/test001/test001_results.csv, removal_check.json. Script: scripts/test001_missing_outcome.py.
+- **Still to do:** the real Grade 4 Science TEST 001 with 10 B + 10 C attempts.
+
 ## Manual tests: to be written by Sanjay (stub list)
 These are deliberately not AI-written. Record the date, commit SHA and result for each.
 - [ ] M1: Pick 10 random Grade 3–4 rows in `records.jsonl` and compare them with the PDF. Is the wording and outcome ID correct?

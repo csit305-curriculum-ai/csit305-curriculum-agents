@@ -37,3 +37,25 @@ These continue the numbering in Document 3 v0.2 T8 (DEC 001–005 are recorded t
 ## DEC 011: Raw and derived source text not committed (2 Nov 2026)
 - **Decision:** No licence is stated for the source files, so raw PDFs, extracted `records.jsonl`, full traces and bundles (which contain source text) are gitignored and reproduced locally.
 - **Committed instead:** Hashes, the chunk manifest (IDs and token counts only), the calibration results and a redacted trace.
+
+
+## DEC 012: TIMSS is context only, not generation evidence (2 Nov 2026, alignment audit)
+- **Why:** Doc 3 Corpus: "the TIMSS chapter is contextual evidence and is not a substitute for those files". The build had indexed it as science (and G4 maths) evidence.
+- **Decision:** `corpus/manifest.json` marks TIMSS `role: context`; it is parsed but not indexed. The Arabic science framework stays `not_indexed`.
+- **Consequence:** No science evidence is indexed, so all 12 science tasks are refused by the gate until an English MoE Grade 3–4 science source is confirmed. This blocks half the 20 main tasks. **Group decision needed.**
+
+## DEC 013: Outcome-inventory gate replaces similarity-only gate (2 Nov 2026, alignment audit). Needs group approval
+- **Why:** Doc 3 failure protocol step 3 says "check the outcome inventory before generation", and Stage 1 asks for outcome filters. Similarity alone cannot show that an outcome is covered, and it falsely refused G4M-05 (TEST 004).
+- **Order of checks:** (1) outcome ID grade/subject must match the request, else `conflicting_request` (Doc 3 T7: never quietly change it); (2) grade in scope; (3) the grade/subject has indexed evidence; (4) an outcome ID is required and must be in the inventory; (5) packet = chunks whose text contains the outcome ID (by score), then similarity fill to k = 5 within the same grade and subject.
+- **Threshold:** The 0.50 value (DEC 008) is **not changed**. It now applies only when a caller sets `require_outcome=False` and gives no outcome ID; no study task does this.
+- **Result:** All 12 maths tasks pass the gate (G4M-05 now passes); all 12 science tasks are refused (DEC 012).
+
+## DEC 014: Output schema matches the Doc 3 pack (2 Nov 2026, alignment audit)
+- **Why:** Doc 3 asks for objectives and lesson sequence, support and extension, questions with answer keys, and feedback templates, linked by objective IDs. DEC 010's schema had no answer keys, objective IDs or real feedback templates.
+- **Decision:** Four sections (`planning`, `differentiation`, `assessment`, `feedback`). Objectives have `O1…` IDs; every other item lists `objective_ids` that must exist. Questions have `Q1…` IDs and `answer_key`. All items carry `citations`. Section models are exported so condition C specialists validate their own section with `parse_section` (same citation rules).
+- **Retry policy (one routine for all conditions, `generate_validated`):** invalid JSON/schema/ID → one regeneration, both attempts counted; timeout, connection, 429 or 5xx error → one retry after a 5 s delay, then `incomplete` with the trace kept. After a failed format retry the last parsed output is kept as `output_candidate` so scoring can count fabricated IDs as cited but unsupported (Doc 3). Incomplete runs get `completion: 0`.
+- **Supersedes:** the schema part of DEC 010.
+
+## DEC 015: TEST 001 run provisionally on Grade 4 Maths (2 Nov 2026, alignment audit)
+- **Why:** Doc 3 specifies a Grade 4 Science outcome, which cannot be run (DEC 012).
+- **Decision:** Same procedure on `MA-4.2.5.1`, condition B only (C not built). This does not replace the Science TEST 001, which must still be run once a source exists, with 10 B and 10 C attempts.
