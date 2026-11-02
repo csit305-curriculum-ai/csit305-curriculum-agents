@@ -42,7 +42,7 @@ These continue the numbering in Document 3 v0.2 T8 (DEC 001–005 are recorded t
 ## DEC 012: TIMSS is context only, not generation evidence (2 Nov 2026, alignment audit)
 - **Why:** Doc 3 Corpus: "the TIMSS chapter is contextual evidence and is not a substitute for those files". The build had indexed it as science (and G4 maths) evidence.
 - **Decision:** `corpus/manifest.json` marks TIMSS `role: context`; it is parsed but not indexed. The Arabic science framework stays `not_indexed`.
-- **Consequence:** No science evidence is indexed, so all 12 science tasks are refused by the gate until an English MoE Grade 3–4 science source is confirmed. This blocks half the 20 main tasks. **Group decision needed.**
+- **Consequence (superseded by DEC 016):** No science evidence is indexed, so all 12 science tasks are refused by the gate until an English MoE Grade 3–4 science source is confirmed. This blocks half the 20 main tasks. **Group decision needed.**
 
 ## DEC 013: Outcome-inventory gate replaces similarity-only gate (2 Nov 2026, alignment audit). Needs group approval
 - **Why:** Doc 3 failure protocol step 3 says "check the outcome inventory before generation", and Stage 1 asks for outcome filters. Similarity alone cannot show that an outcome is covered, and it falsely refused G4M-05 (TEST 004).
@@ -56,6 +56,14 @@ These continue the numbering in Document 3 v0.2 T8 (DEC 001–005 are recorded t
 - **Retry policy (one routine for all conditions, `generate_validated`):** invalid JSON/schema/ID → one regeneration, both attempts counted; timeout, connection, 429 or 5xx error → one retry after a 5 s delay, then `incomplete` with the trace kept. After a failed format retry the last parsed output is kept as `output_candidate` so scoring can count fabricated IDs as cited but unsupported (Doc 3). Incomplete runs get `completion: 0`.
 - **Supersedes:** the schema part of DEC 010.
 
-## DEC 015: TEST 001 run provisionally on Grade 4 Maths (2 Nov 2026, alignment audit)
+## DEC 015: TEST 001 run provisionally on Grade 4 Maths (superseded in part by DEC 016) (2 Nov 2026, alignment audit)
 - **Why:** Doc 3 specifies a Grade 4 Science outcome, which cannot be run (DEC 012).
 - **Decision:** Same procedure on `MA-4.2.5.1`, condition B only (C not built). This does not replace the Science TEST 001, which must still be run once a source exists, with 10 B and 10 C attempts.
+
+## DEC 016: English MoE Science Standards 2017 indexed as science evidence (2 Nov 2026)
+- **Why:** An English source for Grade 3–4 science outcomes was found: the MoE "Science: National Curriculum Standards KG–12" (2017), linked from the DMES MoE Standards page and fetched from the Internet Archive (SRC 002, corpus/SOURCES.md). Earlier docs said no such source existed; that was wrong.
+- **Decision:** Parse pp. 51–63 (English column, word coordinates) into records with `outcome_id` = `SC-` + the source code (e.g. `G4.4.3.2.2` → `SC-4.4.3.2.2`), domain from the second digit (1 Nature of Science, 2 Earth and Space, 3 Life, 4 Physical). Role `evidence`. TIMSS stays context only (DEC 012 unchanged). The Arabic 2019-20 framework stays not indexed (DEC 007).
+- **Tasks:** All 12 science tasks now have outcome IDs. Topics were re-worded to match the chosen outcome (Doc 3: choose outcomes after coverage is confirmed). Codes the source reuses for different text were avoided. **Group review needed** for the topic changes.
+- **Result:** Gate check (`run freeze`): 24/24 tasks pass (12 maths, 12 science). 38 tests pass. Index: 514 evidence records, 61 chunks.
+- **TEST 001:** Now run on Grade 4 Science `SC-4.4.3.2.2`, as Doc 3 specifies: 10/10 B attempts refused (runs/test001_science). The 10 C attempts are still pending (C not built). The Maths run (DEC 015) is kept as an extra result.
+- **Risks:** 2017 edition, may differ from the current curriculum; no licence stated; source has reused codes (see SOURCES.md).

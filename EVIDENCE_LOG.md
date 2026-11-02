@@ -14,3 +14,5 @@ This log continues Document 3 v0.2 T8. ARCH 002, DEC 001–005, TEST 001 and AI 
 | TEST 001 | 2 Nov 2026 | Missing-outcome test | Provisional Maths variant (DEC 015): MA-4.2.5.1 removed from a copy; 10/10 B attempts refused with the expected message and no generation call. Science version with C still blocked (DEC 012) | runs/test001/; commit beed8ed | Provisional pass |
 | AUDIT 001 | 2 Nov 2026 | Alignment audit | Repo checked against Doc 3 v0.2; 11 mismatches fixed (F1–F11), 36 tests pass | TESTING.md; commits 2075096–beed8ed | Done; DEC 012–015 need group review |
 | AI 003 | 2 Nov 2026 | GenAI use | A GenAI assistant wrote the code, tests, docs and draft tasks; see AI_USE.md | AI_USE.md | Verification partly done |
+| SRC 002 | 2 Nov 2026 | Science source found | MoE Science Standards 2017 (English G3–4 outcomes) fetched via Wayback, sha256 0012128f…, indexed; gate 24/24 | corpus/SOURCES.md; DEC 016 | Done; topics and licence need group review |
+| TEST 001-S | 2 Nov 2026 | Missing-outcome test, Grade 4 Science | SC-4.4.3.2.2 removed from a copy; 10/10 B refused, no generation call | runs/test001_science | B done; 10 C pending |

@@ -61,7 +61,7 @@ A GenAI assistant re-read Doc 3 v0.2 in full and checked the repo against it. Mi
 
 | # | Failure found | Fix (commit) | Retest |
 |---|---|---|---|
-| F1 | TIMSS indexed as generation evidence, against Doc 3 Corpus | Marked context only, not indexed (2075096, DEC 012) | `test_timss_not_indexed_so_science_refused` passes |
+| F1 | TIMSS indexed as generation evidence, against Doc 3 Corpus | Marked context only, not indexed (2075096, DEC 012) | `test_timss_context_never_retrieved` passes (test renamed under SRC 002) |
 | F2 | No page numbers in records or packets (Doc 3 metadata list) | Per-page parsing; chunks carry `pages` (2075096) | `test_outcome_chunk_carries_pages` passes |
 | F3 | Whole-document parsing silently lost 27 outcome rows across page breaks (408 vs 435) | Per-page parsing (2075096) | 435 evidence rows; inventory in corpus/processed/outcome_inventory.csv |
 | F4 | No source-hash check before use (Doc 3 T7 "hash mismatch blocks use") | `verify_sources()` against corpus/manifest.json in build, freeze, run (2075096) | Called on every build/freeze/run; M2 manual test still to do |
@@ -93,3 +93,12 @@ These are deliberately not AI-written. Record the date, commit SHA and result fo
 - [ ] M5: Hand-craft a model output citing a real chunk ID from a *different* task's bundle and confirm it is rejected.
 - [ ] M6: Run condition A twice on the same task and compare outputs, to see repeat variability before the 3-repeat design.
 - [ ] M7: Conflicting grade/subject task (e.g. Grade 3 task with a Grade 4 outcome ID): confirm the expected behaviour and decide the rule (Doc 3 edge case).
+
+## SRC 002 / TEST 001 Science (2 Nov 2026)
+| Step | Result |
+|---|---|
+| Failure | Docs claimed no English G3–4 science outcomes; all 12 science tasks refused; TEST 001 could not run as specified |
+| Fix | MoE Science Standards 2017 found, hashed, parsed (79 records) and indexed (DEC 016); science outcome IDs added to tasks.yaml |
+| Test change | `test_timss_not_indexed_so_science_refused` replaced by `test_grade4_science_outcome_retrieved`, `test_timss_context_never_retrieved`, `test_unknown_science_outcome_refused` (the old test asserted the gap itself) |
+| Retest | 38 passed; `run freeze` 24/24 ok |
+| TEST 001 (Science, B only) | `SC-4.4.3.2.2` removed from a copy (1 record); 10/10 refused with the expected Grade 4 Science message, no generation call. C pending |
