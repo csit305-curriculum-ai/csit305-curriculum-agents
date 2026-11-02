@@ -14,8 +14,17 @@ TIMEOUT_S = 120
 PRICE = {"peak": {"in_miss": 0.30, "in_hit": 0.006, "out": 1.20}, "offpeak": {"in_miss": 0.15, "in_hit": 0.003, "out": 0.60}}
 
 
+PRICING_SNAPSHOT = {"source": "https://api-docs.deepseek.com/quick_start/pricing", "read": "2026-11-02", "usd_per_1M": PRICE,
+                    "peak_hours_utc": "01:00-04:00 and 06:00-10:00 Mon-Fri"}
+RETRY_DELAY_S = 5.0
+
+
 class LLMTimeout(Exception):
     pass
+
+
+class LLMTransientError(Exception):
+    """Connection errors, HTTP 429 and 5xx: handled with the same single bounded retry as a timeout."""
 
 
 @dataclass
@@ -62,6 +71,8 @@ class DeepSeekClient:
                 response_format={"type": "json_object"}, extra_body={"thinking": {"type": "disabled"}})
         except openai.APITimeoutError as e:
             raise LLMTimeout(str(e)) from e
+        except (openai.APIConnectionError, openai.RateLimitError, openai.InternalServerError) as e:
+            raise LLMTransientError(f"{type(e).__name__}: {e}") from e
         u = r.usage
         cached = getattr(u, "prompt_cache_hit_tokens", None) or 0
         return LLMResponse(text=r.choices[0].message.content or "", prompt_tokens=u.prompt_tokens,
