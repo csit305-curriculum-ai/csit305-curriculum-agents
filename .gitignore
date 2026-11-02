@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+# Raw source files: redistribution licence unclear -> fetched locally by scripts/fetch_corpus.sh
+corpus/raw/
+# Derived index is rebuilt from the corpus
+index/
+runs/*.jsonl
+!runs/smoke/
