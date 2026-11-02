@@ -6,7 +6,7 @@ This repository is the research artefact for this paper. The paper compares less
 - **B**: one LLM call grounded in a frozen curriculum evidence packet.
 - **C**: four specialist calls (planning, differentiation, assessment, feedback) sharing the identical packet.
 
-The design follows Document 3 v0.2 (26 Oct 2026). This repository currently contains Sanjay's parts: the corpus and source manifest, retrieval, and conditions A and B. Condition C and logging analysis (Manzi) and scoring (Manzi, Sameer, Mousa) are still to come.
+The design follows Document 3 v0.3 (2 Nov 2026). This repository currently contains Sanjay's parts: the corpus and source manifest, retrieval, and conditions A and B. Condition C and logging analysis (Manzi) and scoring (Manzi, Sameer, Mousa) are still to come.
 
 ## Architecture (Doc 3 ARCH 002)
 ```
@@ -52,6 +52,7 @@ The full experiment (20 tasks × 3 conditions × 3 repeats) has **not** been run
 - Science outcomes come from the MoE Science Standards 2017 (English G3–4 outcomes, DEC 016). TIMSS is context only (DEC 012). All 24 tasks pass the gate.
 - Run order: `python -m cagents.build_index`, then `python -m cagents.run freeze`, then `python -m cagents.run run ...`.
 - Maths text extraction is heuristic. Some rows lose words that wrap across blank lines, chapter and lesson titles are mixed into the outcome text, and some outcome IDs in the source are misnumbered (e.g. `MA-5.5.9.1` appears inside the Grade 4 block).
-- The similarity threshold was calibrated on only 27 hand-written queries. It refuses 3 of the 24 draft tasks, including one maths task (G4M-05) whose topic is in the corpus (see TESTING.md).
+- The similarity-only gate was calibrated on 27 hand-written queries. In the gate check (TEST 004) it refused 3 of 24 draft tasks, including a false refusal of a valid maths task (G4M-05, 0.499 vs 0.50). It was replaced by an outcome-inventory gate (DEC 013); all 24 draft tasks pass the current gate.
+- Tests: 47 collected, 38 pass and 9 are skipped stubs for condition C (`pytest`, 2 Nov 2026).
 - The NLI checker, condition C, scoring and statistics are not implemented here.
 - Model outputs are non-deterministic even at T=0.3. Repeats are part of the design.
