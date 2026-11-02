@@ -1,0 +1,40 @@
+# DRAFT FOR GROUP REVIEW (v0.1, 2 Nov 2026, drafted by Sanjay with GenAI help; see AI_USE.md AI 003).
+# Structure follows Document 3 v0.2 T3: per grade-subject cell, 5 main tasks + 1 pilot task
+# = 20 main + 4 pilot. Pilot tasks are for tuning prompts only and are excluded from analysis.
+# Maths outcome IDs come from the MoE Maths Scope and Sequence G1-12 (prefixed "MA-").
+# Science: no English grade-specific MoE outcome list was found, so science tasks have outcome_id: null
+# and are grounded only in the TIMSS 2023 Cycle 1 science content (TIMSS-SC-C1). The group must decide
+# whether to replace these once an English Grade 3-4 science outcome source is found (see corpus/SOURCES.md).
+# Review checklist: topic suits the grade? outcome ID matches the topic? context realistic for UAE classes?
+version: 0.1-draft
+status: draft_for_group_review
+default_context: "Mixed-ability class of 25 students, 45-minute lesson, English-medium UAE public school"
+tasks:
+  # ---------- Grade 3 Maths ----------
+  - {task_id: G3M-P1, split: pilot, grade: 3, subject: maths, outcome_id: MA-3.1.1.1, topic: "Place value of whole numbers through thousands"}
+  - {task_id: G3M-01, split: main, grade: 3, subject: maths, outcome_id: MA-3.3.4.1, topic: "Subtraction with regrouping"}
+  - {task_id: G3M-02, split: main, grade: 3, subject: maths, outcome_id: MA-3.4.2.1, topic: "Relating multiplication to repeated addition"}
+  - {task_id: G3M-03, split: main, grade: 3, subject: maths, outcome_id: MA-3.10.2.1, topic: "Fractions that name part of a whole"}
+  - {task_id: G3M-04, split: main, grade: 3, subject: maths, outcome_id: MA-3.12.4.1, topic: "Relating bar graphs to scaled picture graphs"}
+  - {task_id: G3M-05, split: main, grade: 3, subject: maths, outcome_id: MA-3.14.5.1, topic: "Finding the area of rectangles by tiling"}
+  # ---------- Grade 4 Maths ----------
+  - {task_id: G4M-P1, split: pilot, grade: 4, subject: maths, outcome_id: MA-4.2.5.1, topic: "Adding multi-digit whole numbers"}
+  - {task_id: G4M-01, split: main, grade: 4, subject: maths, outcome_id: MA-4.4.5.1, topic: "Multiplying a two-digit number by a one-digit number"}
+  - {task_id: G4M-02, split: main, grade: 4, subject: maths, outcome_id: MA-4.8.3.1, topic: "Equivalent fractions"}
+  - {task_id: G4M-03, split: main, grade: 4, subject: maths, outcome_id: MA-4.10.1.1, topic: "Modelling decimals with place-value charts and grids"}
+  - {task_id: G4M-04, split: main, grade: 4, subject: maths, outcome_id: MA-4.13.3.1, topic: "Concepts of angles and angle measurement"}
+  - {task_id: G4M-05, split: main, grade: 4, subject: maths, outcome_id: MA-4.17.1.1, topic: "Value of coins and bills (financial literacy)"}
+  # ---------- Grade 3 Science (outcome IDs pending; see header) ----------
+  - {task_id: G3S-P1, split: pilot, grade: 3, subject: science, outcome_id: null, topic: "Living and non-living things"}
+  - {task_id: G3S-01, split: main, grade: 3, subject: science, outcome_id: null, topic: "Properties and states of matter"}
+  - {task_id: G3S-02, split: main, grade: 3, subject: science, outcome_id: null, topic: "Plant and animal growth and life cycles"}
+  - {task_id: G3S-03, split: main, grade: 3, subject: science, outcome_id: null, topic: "Pushes, pulls and changes in motion"}
+  - {task_id: G3S-04, split: main, grade: 3, subject: science, outcome_id: null, topic: "Weather patterns and seasons in the UAE"}
+  - {task_id: G3S-05, split: main, grade: 3, subject: science, outcome_id: null, topic: "Using simple investigation tools and recording observations"}
+  # ---------- Grade 4 Science (outcome IDs pending; see header) ----------
+  - {task_id: G4S-P1, split: pilot, grade: 4, subject: science, outcome_id: null, topic: "The water cycle and Earth's systems"}
+  - {task_id: G4S-01, split: main, grade: 4, subject: science, outcome_id: null, topic: "Energy sources and energy transfer in daily life"}
+  - {task_id: G4S-02, split: main, grade: 4, subject: science, outcome_id: null, topic: "Properties of light and how it interacts with objects"}
+  - {task_id: G4S-03, split: main, grade: 4, subject: science, outcome_id: null, topic: "Human impact on Earth and scarcity of fresh water"}
+  - {task_id: G4S-04, split: main, grade: 4, subject: science, outcome_id: null, topic: "Earth's place in the solar system: day, night and seasons"}
+  - {task_id: G4S-05, split: main, grade: 4, subject: science, outcome_id: null, topic: "Ecosystems: how living things obtain energy"}
