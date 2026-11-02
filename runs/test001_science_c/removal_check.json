@@ -1,0 +1,8 @@
+{
+ "removed_records": 1,
+ "in_modified_records": false,
+ "in_modified_chunk_text": false,
+ "target": "SC-4.4.3.2.2",
+ "original_sha256": "106e30ced3db58db612ddaaa9499f489073f37ee865d55f898b76b911b9e589c",
+ "modified_sha256": "a98dab6ab6c64702d5631965ea77f498648b14afc5f956183f71dea7b2bb044d"
+}
