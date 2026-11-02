@@ -67,3 +67,21 @@ These continue the numbering in Document 3 v0.2 T8 (DEC 001–005 are recorded t
 - **Result (918c194, 18912be):** Gate check (`run freeze`): 24/24 tasks pass (12 maths, 12 science). 38 tests pass. Index: 514 evidence records, 61 chunks.
 - **TEST 001:** Now run on Grade 4 Science `SC-4.4.3.2.2`, as Doc 3 specifies: 10/10 B attempts refused (runs/test001_science). The 10 C attempts are still pending (C not built). The Maths run (DEC 015) is kept as an extra result.
 - **Risks:** 2017 edition, may differ from the current curriculum; no licence stated; source has reused codes (see SOURCES.md).
+
+## DEC 017: Condition C implemented as plain-Python orchestration (2 Nov 2026, AI-written, pending Manzi review)
+- **Decision:** `src/cagents/condition_c.py` runs four specialist calls in a fixed `for` loop: planning → differentiation → assessment → feedback. No LangGraph. Doc 3 still mentions LangGraph; **Doc 3 must be changed to "plain Python orchestration"** or Manzi swaps the loop for LangGraph (behaviour must not change).
+- **Handoffs:** every node gets the identical frozen packet E (same `evidence_block` as B, same hash prefix) plus only the validated upstream drafts it needs: differentiation ← planning; assessment ← planning; feedback ← planning + assessment.
+- **Why:** smallest orchestration that satisfies Doc 3; one less dependency; easy to test.
+
+## DEC 018: 800 output tokens per specialist (2 Nov 2026, pending group approval)
+- `MAX_TOKENS_C_NODE = 800` (4 × 800 = 3,200 max for C vs 2,400 for A/B). Resolves the open decision in CONDITION_C_PLAN.md. Each node is told to keep its section under ~250 words, so the assembled pack can reach the 700–900-word target. Token comparison with A/B must report this budget difference.
+
+## DEC 019: Python assembly, no fifth model call; failures never substituted (2 Nov 2026)
+- `assemble()` builds the shared `TeachingPack` in Python and re-validates it (all four sections, every objective ID referenced exists). A model call count of exactly 4 (+ regenerations) is logged as `model_calls`.
+- A node that fails after its single regeneration / bounded retry stops the job: `job_status = incomplete`, `failed_node` set, valid upstream sections kept in `output_candidate`. B is never substituted.
+
+## DEC 020: Same validation and retry policy per node (2 Nov 2026)
+- Each node goes through `conditions.generate_validated` with `schema.parse_section` (condition "C" citation rules: only packet chunk IDs, at least one citation). Extra node checks: planning objective IDs unique and used by its own lesson sequence; assessment question IDs unique; downstream nodes may only link planning's objective IDs. Coverage gate runs before any call: a non-"ok" packet returns the gate refusal with 0 model calls. The timed C request reproduces the frozen packet (`assert_reproduces`) exactly like B (`run.py --conditions C`).
+
+## DEC 021: Offline scripted client for C until the MoE licence is confirmed (2 Nov 2026)
+- `src/cagents/scripted.py` (`ScriptedSpecialistClient`, `run.py --scripted`) returns fixed template sections citing the real packet IDs found in the prompt. Its text is marked `[scripted]`, is **not model output and must never be scored**. It only exercises order, handoffs, validation, logging and assembly. No live DeepSeek call for C until the licence is confirmed (see TEST 005b disclosure). Token counts are char/4 estimates.

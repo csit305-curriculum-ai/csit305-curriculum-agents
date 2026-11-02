@@ -53,7 +53,13 @@ if choice == REFUSAL:
         st.dataframe([{k: r[k] for k in ("attempt", "status", "generation_called", "elapsed_s", "pass")} for r in rows])
     else:
         st.warning("runs/test001_science/test001_results.csv not found.")
-    st.info("Condition C: not yet in repo (Manzi). TEST 001 for C is pending.")
+    crows = loader.test001_c_rows()
+    if crows:
+        okc = sum(r["pass"] == "True" for r in crows)
+        st.metric("C refused correctly (TEST 006, offline: gate refuses before any model call)", f"{okc}/{len(crows)}")
+        st.caption(f"B + C combined: {ok + okc if rows else okc}/{len(rows) + len(crows)} safe refusals (target 20/20).")
+    else:
+        st.info("Condition C TEST 001 replay not found (runs/test001_science_c).")
     st.stop()
 
 t = tasks[choice]
@@ -110,14 +116,37 @@ def show(cond: str):
         st.error(f"Recorded run did not produce a valid lesson ({r['status']}).")
 
 
+def show_c():
+    st.markdown("#### Condition C (four agents)")
+    st.warning("OFFLINE / SCRIPTED MODEL RESPONSES: pipeline demo only, not model output, not a quality result (TEST 006).")
+    c = loader.c_offline_run(t["task_id"])
+    if not c:
+        st.info("No offline C run for this task (runs: G3M-P1, G3S-P1, G4M-P1).")
+        return
+    j = c["job"]
+    st.caption(f"source {c['_source']} | status {j['status']} | model calls {j.get('model_calls', j.get('attempts'))} "
+               f"(no 5th call) | tokens in/out {j['prompt_tokens']}/{j['completion_tokens']} | est. cost ${float(j['cost_usd']):.4f}")
+    if c["nodes"]:
+        st.markdown("**Four-agent trace**")
+        st.dataframe([{"#": n["node_pos"], "node": n["node"], "status": n["status"], "attempts": n["attempts"],
+                       "tokens in": n["prompt_tokens"], "tokens out": n["completion_tokens"], "cost $": n["cost_usd"]}
+                      for n in c["nodes"]], hide_index=True)
+    out = j.get("output")
+    if isinstance(out, dict):
+        st.markdown(f"**Assembled pack (Python, no model call): {out.get('title', '')}**")
+        for o in out["planning"]["objectives"]:
+            st.markdown(f"- {o['objective_id']}: {o['text']}  `{', '.join(o['citations'])}`")
+        with st.expander("Full assembled JSON"):
+            st.json(out)
+
+
 ca, cb, cc = st.columns(3)
 with ca:
     show("A")
 with cb:
     show("B")
 with cc:
-    st.markdown("#### Condition C (four agents)")
-    st.info("Not yet in repo (Manzi). See docs/CONDITION_C_PLAN.md.")
+    show_c()
 
 if LIVE:
     st.markdown("### Live generation (--live)")

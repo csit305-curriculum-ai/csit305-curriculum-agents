@@ -122,3 +122,20 @@ Note (2 Nov 2026): commit author emails were rewritten before the first push, so
 
 ## Current test count (2 Nov 2026, after PLAN C stubs)
 `pytest --collect-only`: 47 tests collected. `pytest`: 38 passed, 9 skipped. The 9 skipped tests are placeholder stubs for condition C (Manzi) and test nothing yet.
+
+## TEST 006: Condition C offline end-to-end (OFFLINE / SCRIPTED model responses), 2 Nov 2026
+**Not a quality result. No API call was made.** Model = `ScriptedSpecialistClient` (DEC 021); text is template, tokens are char/4 estimates.
+- **006a, pipeline run:** `cd src && ../.venv/bin/python -m cagents.run run --tasks G3M-P1 G3S-P1 G4M-P1 --conditions C --scripted --out runs/c_offline`. Real bge-m3 index; each timed request reproduced its frozen packet. 3/3 jobs `ok`, 4 model calls each (no fifth call), all four nodes valid on attempt 1, packs assembled and re-validated in Python.
+
+| Task | Status | Calls | Tokens in / out (est.) | Est. cost | Packet hash |
+|---|---|---|---|---|---|
+| G3M-P1 | ok | 4 | 8,930 / 465 | US$0.0016 | ca30bd44… |
+| G4M-P1 | ok | 4 | 8,964 / 454 | US$0.0016 | 3ca2c2a2… |
+| G3S-P1 | ok | 4 | 10,255 / 472 | US$0.0018 | 6a5910e1… |
+
+  Note the prompt-token cost of C: the packet is sent 4 times (~9–10k input tokens vs ~2.8k for B in TEST 005b).
+- **006b, TEST 001 for C:** `cd src && PYTHONPATH=. ../.venv/bin/python ../scripts/test001_missing_outcome.py SC-4.4.3.2.2 C`. SC-4.4.3.2.2 removed from a corpus copy; **10/10 C attempts refused** with the expected message and **no model call** (MockClient with no outputs). Combined with TEST 001-S: **20/20 B+C safe refusals** (Doc 3 target met, offline). This part does not depend on scripted text: the gate refuses before any call. `runs/test001_science_c/`.
+- Outputs: `runs/c_offline/summary.csv` (committed), `runs/c_offline/trace.jsonl` (local only: contains MoE text). Screenshots `docs/demo/c_*.png`.
+
+## Current test count (2 Nov 2026, after Condition C)
+`pytest --collect-only`: 58 collected. `pytest`: **58 passed, 0 skipped** (16 Condition C tests in `tests/test_condition_c.py`, replacing the 9 stubs). Written by the same AI that wrote C: weak independent evidence; manual tests M1–M7 still needed.

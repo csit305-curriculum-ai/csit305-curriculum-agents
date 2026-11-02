@@ -1,0 +1,4 @@
+run_id,job_id,task_id,split,grade,subject,outcome_id,condition,repeat,order_pos,status,completion,attempts,generation_called,word_count,prompt_tokens,completion_tokens,cached_tokens,cost_usd,retrieval_latency_s,gen_latency_s,total_latency_s,requested_model,returned_model,bundle_hash,n_chunks,corpus_hash,reason
+4044bd029fdf,f971c17bb42a,G3M-P1,pilot,3,maths,MA-3.1.1.1,C,1,1,ok,1,4,True,96,8930,465,0,0.001619,0.3555,0.0,0.357,deepseek-flash,scripted-offline,ca30bd44fc29b9f0,5,6fed5bf077087787,
+6f28fa340522,53c93a08413f,G4M-P1,pilot,4,maths,MA-4.2.5.1,C,1,1,ok,1,4,True,84,8964,454,0,0.001617,0.1064,0.0,0.108,deepseek-flash,scripted-offline,3ca2c2a23d807c9a,5,6fed5bf077087787,
+bfcdd02f7219,54360297e56b,G3S-P1,pilot,3,science,SC-3.3.1.3.2,C,1,1,ok,1,4,True,100,10255,472,0,0.001822,0.0932,0.0,0.095,deepseek-flash,scripted-offline,6a5910e10fb175c5,5,6fed5bf077087787,

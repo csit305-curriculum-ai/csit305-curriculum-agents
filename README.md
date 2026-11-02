@@ -6,7 +6,7 @@ This repository is the research artefact for this paper. The paper compares less
 - **B**: one LLM call grounded in a frozen curriculum evidence packet.
 - **C**: four specialist calls (planning, differentiation, assessment, feedback) sharing the identical packet.
 
-The design follows Document 3 v0.3 (2 Nov 2026). This repository currently contains Sanjay's parts: the corpus and source manifest, retrieval, and conditions A and B. Condition C and logging analysis (Manzi) and scoring (Manzi, Sameer, Mousa) are still to come.
+The design follows Document 3 v0.3 (2 Nov 2026). This repository contains Sanjay's parts (corpus and source manifest, retrieval, conditions A and B) and, on branch `condition-c`, an AI-written Condition C pending Manzi's review (see below and AI_USE.md). Scoring (Manzi, Sameer, Mousa) is still to come.
 
 ## Architecture (Doc 3 ARCH 002)
 ```
@@ -53,7 +53,7 @@ The full experiment (20 tasks × 3 conditions × 3 repeats) has **not** been run
 **coverage gate** (DEC 013), shows the chunks with scores, checks the live packet hash against the frozen packet, then shows
 Condition A and B outputs side by side. Outputs are **replayed** from recorded runs (`runs/smoke_2`, `runs/smoke`), clearly
 labelled, and **no API call is made**. Tasks with no recorded run say "No recorded run". The TEST001 entry replays the
-signature failure test (B refused 10/10). Condition C shows "not yet in repo (Manzi)".
+signature failure test (B refused 10/10). The Condition C panel shows the **offline / scripted** C run (TEST 006): four-agent trace, assembled pack and token estimates.
 ```bash
 uv pip install --python .venv -r requirements-demo.txt
 .venv/bin/streamlit run demo/app.py            # Windows: .venv\Scripts\streamlit run demo\app.py
@@ -63,11 +63,22 @@ Needs the index built first (see Setup). Full lesson text comes from `runs/*/tra
 without it the app shows status/tokens from `summary.csv` only. `-- --live` enables new DeepSeek calls; it is off by default and
 must not be used until the MoE licence is confirmed. Screenshots: `docs/demo/`.
 
+## Condition C (four agents)
+`src/cagents/condition_c.py`: planning → differentiation → assessment → feedback, plain Python (DEC 017). Every node gets the same frozen
+packet as B plus the earlier drafts it needs; 800 output tokens per node (DEC 018); same model settings, validation and one regeneration
+(DEC 020); coverage gate before any call; Python assembles the pack, no fifth call (DEC 019); every call logged to JSONL with per-job totals.
+```bash
+cd src && ../.venv/bin/python -m cagents.run run --tasks G3M-P1 --conditions A B C --out runs/x   # live (NOT until licence confirmed)
+cd src && ../.venv/bin/python -m cagents.run run --tasks G3M-P1 --conditions C --scripted --out runs/c_offline   # offline
+```
+**Status:** written by Grok Bot at Sanjay's request on 2 Nov 2026, pending Manzi's review and ownership. Only run offline with
+scripted responses (TEST 006, DEC 021); no real C output exists yet.
+
 ## Limitations (current state)
 - Science outcomes come from the MoE Science Standards 2017 (English G3–4 outcomes, DEC 016). TIMSS is context only (DEC 012). All 24 tasks pass the gate.
 - Run order: `python -m cagents.build_index`, then `python -m cagents.run freeze`, then `python -m cagents.run run ...`.
 - Maths text extraction is heuristic. Some rows lose words that wrap across blank lines, chapter and lesson titles are mixed into the outcome text, and some outcome IDs in the source are misnumbered (e.g. `MA-5.5.9.1` appears inside the Grade 4 block).
 - The similarity-only gate was calibrated on 27 hand-written queries. In the gate check (TEST 004) it refused 3 of 24 draft tasks, including a false refusal of a valid maths task (G4M-05, 0.499 vs 0.50). It was replaced by an outcome-inventory gate (DEC 013); all 24 draft tasks pass the current gate.
-- Tests: 47 collected, 38 pass and 9 are skipped stubs for condition C (`pytest`, 2 Nov 2026).
-- The NLI checker, condition C, scoring and statistics are not implemented here.
+- Tests: 58 collected, 58 pass (`pytest`, 2 Nov 2026), including 16 Condition C tests.
+- The NLI checker, scoring and statistics are not implemented here. Condition C has only been run offline with scripted responses (no real model output yet).
 - Model outputs are non-deterministic even at T=0.3. Repeats are part of the design.

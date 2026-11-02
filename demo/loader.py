@@ -55,3 +55,34 @@ def frozen_hash(task_id: str, root: Path = ROOT) -> str | None:
     if m.exists():
         return json.loads(m.read_text()).get("packets", {}).get(task_id, {}).get("bundle_hash")
     return None
+
+
+C_OFFLINE_DIR = "c_offline"
+
+
+def c_offline_run(task_id: str, root: Path = ROOT) -> dict | None:
+    """Latest offline/scripted Condition C job for a task: {'job': result, 'nodes': [node_result...]}.
+    Full trace (local only) when present, else the committed summary.csv row (no node trace, no text)."""
+    rd = root / "runs" / C_OFFLINE_DIR
+    trace, summ = rd / "trace.jsonl", rd / "summary.csv"
+    if trace.exists():
+        recs = [json.loads(l) for l in trace.read_text().splitlines()]
+        jobs = [r for r in recs if r.get("event") == "result" and r["task_id"] == task_id and r["condition"] == "C"]
+        if jobs:
+            job = jobs[-1]
+            nodes = [r for r in recs if r.get("event") == "node_result" and r["run_id"] == job["run_id"]]
+            return {"job": job, "nodes": nodes, "_source": f"runs/{C_OFFLINE_DIR}/trace.jsonl"}
+    if summ.exists():
+        with summ.open() as f:
+            rows = [r for r in csv.DictReader(f) if r["task_id"] == task_id and r["condition"] == "C"]
+        if rows:
+            return {"job": dict(rows[-1], output=None, nodes=[]), "nodes": [], "_source": f"runs/{C_OFFLINE_DIR}/summary.csv"}
+    return None
+
+
+def test001_c_rows(root: Path = ROOT) -> list[dict]:
+    p = root / "runs" / (TEST001_DIR + "_c") / "test001_results.csv"
+    if not p.exists():
+        return []
+    with p.open() as f:
+        return list(csv.DictReader(f))

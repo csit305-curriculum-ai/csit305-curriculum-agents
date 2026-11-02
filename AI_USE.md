@@ -23,3 +23,11 @@ The commits do not mean Sanjay wrote the code by hand.
 The tests were written by the same assistant that wrote the code, so they share its blind spots. The independent check is the manual test list in TESTING.md.
 
 | Alignment audit (2 Nov 2026) | AI | Doc 3 re-read in full; 11 mismatches fixed with tests (TESTING.md F1–F11) | Group to approve DEC 012–015; the audit is the assistant checking its own work |
+
+## Condition C (2 Nov 2026)
+On 2 Nov 2026, because Manzi's own C code was not available on GitHub or Sanjay's PC, Sanjay asked Grok Bot to build Condition C. **Grok Bot wrote** `src/cagents/condition_c.py`, `src/cagents/scripted.py`, the C wiring in `run.py`, `scripts/test001_missing_outcome.py` (C option), `tests/test_condition_c.py` (16 tests), the demo C panel, DEC 017–021 and TEST 006. It is on branch `condition-c` in a pull request that is **not merged**. It is **pending Manzi's review and ownership**: Manzi should read, change and explain it, and record his changes, before merging. It must not be presented as Manzi's work.
+
+| Piece | Written by | How it was verified | Still needed |
+|---|---|---|---|
+| Condition C orchestration, assembly, logging | AI (Grok Bot) | 16 mocked tests; offline scripted run on 3 tasks; TEST 001 for C 10/10 (TEST 006) | Manzi review; a real (licensed) run; manual tests |
+| Scripted offline client | AI (Grok Bot) | Used only for TEST 006; outputs marked `[scripted]` | Never use for scoring |

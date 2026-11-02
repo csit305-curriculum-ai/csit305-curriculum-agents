@@ -16,6 +16,7 @@ from pathlib import Path
 import yaml
 
 from . import corpus
+from .condition_c import run_condition_c
 from .conditions import TraceLogger, run_condition
 from .retrieval import ROOT, EvidenceBundle, assert_reproduces
 
@@ -61,10 +62,13 @@ def run(a) -> None:
     out = ROOT / a.out
     out.mkdir(parents=True, exist_ok=True)
     logger = TraceLogger(out / "trace.jsonl")
-    idx = _index() if "B" in a.conditions else None
+    idx = _index() if ("B" in a.conditions or "C" in a.conditions) else None
     if a.mock:
         from .llm import MockClient
         client = MockClient([json.dumps({"status": "insufficient_evidence", "grade": 3, "subject": "maths", "reason": "mock"})] * 1000)
+    elif a.scripted:
+        from .scripted import ScriptedSpecialistClient
+        client = ScriptedSpecialistClient()
     else:
         from .llm import DeepSeekClient
         client = DeepSeekClient()
@@ -72,7 +76,7 @@ def run(a) -> None:
     rows = []
     for t in load_tasks(a.tasks):
         frozen = None
-        if "B" in a.conditions:
+        if "B" in a.conditions or "C" in a.conditions:
             fp = PACKETS / f"{t['task_id']}.json"
             if not fp.exists():
                 raise SystemExit(f"No frozen packet for {t['task_id']}; run `python -m cagents.run freeze` first")
@@ -83,10 +87,13 @@ def run(a) -> None:
             rng.shuffle(order)
             for pos, cond in enumerate(order, 1):
                 live = None
-                if cond == "B":
+                if cond in ("B", "C"):
                     live = idx.retrieve(t["topic"], t["subject"], t["grade"], outcome_id=t.get("outcome_id"))
                     assert_reproduces(frozen, live)  # raises PacketMismatch -> run stops
-                r = run_condition(t, cond, client, logger, bundle=live, repeat=rep, job_id=job_id, order_pos=pos)
+                if cond == "C":
+                    r = run_condition_c(t, client, logger, live, repeat=rep, job_id=job_id, order_pos=pos)
+                else:
+                    r = run_condition(t, cond, client, logger, bundle=live, repeat=rep, job_id=job_id, order_pos=pos)
                 last = {}
                 for line in reversed((out / "trace.jsonl").read_text().splitlines()):
                     e = json.loads(line)
@@ -110,7 +117,7 @@ def main() -> None:
     r = sub.add_parser("run")
     r.add_argument("--tasks", nargs="*"); r.add_argument("--conditions", nargs="+", default=["A", "B"])
     r.add_argument("--repeats", type=int, default=1); r.add_argument("--out", default="runs/latest")
-    r.add_argument("--mock", action="store_true"); r.add_argument("--seed", type=int, default=305)
+    r.add_argument("--mock", action="store_true"); r.add_argument("--scripted", action="store_true"); r.add_argument("--seed", type=int, default=305)
     a = ap.parse_args()
     freeze(a.tasks) if a.cmd == "freeze" else run(a)
 
