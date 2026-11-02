@@ -56,6 +56,21 @@ Each of the 24 tasks in tasks.yaml was run through `Index.retrieve(topic, subjec
   - B cited only one chunk.
 - **Files:** runs/smoke/summary.csv and runs/smoke/trace_redacted.jsonl. The full trace is kept locally only.
 
+## Live smoke test re-run (TEST 005b), 2 Nov 2026, 11:29 UTC+4
+- **Why:** TEST 005 used the old schema. Same setup (G3M-P1, one run each of A and B, deepseek-flash, T=0.3, max 2,400 tokens), current four-section schema, peak pricing.
+
+| Cond. | Status | Attempts | In tokens | Out tokens | Latency | Cost (USD) | Citations |
+|---|---|---|---|---|---|---|---|
+| B | ok | 1 | 2,805 | 1,782 | 10.8 s | 0.002980 | moe-ma-g3-000 (1 of 5 bundle chunks) |
+| A | invalid_output | 2 | 3,351 | 4,800 | 23.2 s | 0.005975 | none |
+
+- **Total:** US$0.0090.
+- **Finding (failure):** A hit the 2,400-token limit on both attempts (`finish_reason=length`), so its JSON was cut off and it was logged as invalid_output after one regeneration, as designed. B passed at 656 words.
+- **Fix needed (group decision, not applied):** raise the A/B (and per-node C) output limit or tighten the length instruction, then retest in the pilot. Not changed here, to avoid tuning on one run.
+- **Observation:** B again cited only one of five chunks.
+- **Files:** runs/smoke_2/summary.csv and runs/smoke_2/trace_redacted.jsonl (prompts and outputs redacted; full trace kept locally).
+- **Disclosure:** this re-run again sent MoE Mathematics excerpts to the DeepSeek API before reuse terms were confirmed (enquiry to MoE drafted, not yet sent). No further API calls until terms are confirmed.
+
 ## Alignment audit against Doc 3 (2 Nov 2026, 10:51–12:00 UTC+4)
 A GenAI assistant re-read Doc 3 v0.2 in full and checked the repo against it. Mismatches found, fixed and retested:
 
@@ -75,7 +90,7 @@ A GenAI assistant re-read Doc 3 v0.2 in full and checked the repo against it. Mi
 
 - **First retest after F1–F5 (at 463a18f, before the test rewrite):** 13 failed, 12 passed. All failures came from tests written for the old API (`exclude_outcomes`, old schema, similarity-only gate). Tests rewritten to Doc 3 behaviour, not loosened.
 - **Final retest (1558338):** 36 passed.
-- **The live smoke test (TEST 005) used the old schema and is now stale.** Re-run it once before the pilot (about US$0.004).
+- **The live smoke test (TEST 005) used the old schema.** It was re-run on 2 Nov 2026 (TEST 005b above).
 - **Disclosure:** TEST 005 sent MoE excerpts to the DeepSeek API before the source terms were confirmed (Doc 3 Corpus). No further API calls were made.
 
 ## TEST 001 (provisional Maths variant, DEC 015), 2 Nov 2026

@@ -9,6 +9,7 @@ corpus/raw/
 index/
 runs/*.jsonl
 !runs/smoke/
+!runs/smoke_2/
 corpus/processed/records.jsonl
 runs/**/trace.jsonl
 runs/**/bundle_*.json
