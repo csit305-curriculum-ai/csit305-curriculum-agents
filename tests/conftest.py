@@ -27,7 +27,7 @@ RECORDS = [
     {"subject": "science", "grades": [1, 2, 3, 4], "domain": "Life", "outcome_id": "SC-C1-LIFE", "text": "plants animals life cycles growth living nonliving"},
 ]
 for i, r in enumerate(RECORDS):
-    r.update(source_file="moe_test.pdf", file_sha256="abc", doc_id="moe_test", record_no=i)
+    r.update(source_file="moe_test.pdf", file_sha256="abc", doc_id="moe_test", record_no=i, page=10 + i, role="evidence")
 
 
 @pytest.fixture
@@ -43,12 +43,24 @@ def index(records):
     return idx
 
 
-def lesson(grade=3, subject="maths", cites=("moe-ma-g3-000",), status="ok"):
+def pack(grade=3, subject="maths", cites=("moe-ma-g3-000",), status="ok", obj_ref="O1", as_dict=False):
+    """A valid four-section teaching pack (Doc 3: objectives+sequence, support+extension, questions+keys, feedback)."""
     if status != "ok":
-        return json.dumps({"status": status, "grade": grade, "subject": subject, "reason": "not covered"})
-    c = list(cites)
-    return json.dumps({"status": "ok", "grade": grade, "subject": subject, "outcome_id": "MA-3.1.1.1", "title": "Place value",
-                       "objectives": [{"text": "Read numbers to thousands", "citations": c}],
-                       "activities": [{"step": 1, "description": "Base-ten blocks warm-up", "minutes": 10, "citations": c}],
-                       "differentiation": {"support": "place value chart", "extension": "five-digit numbers"},
-                       "assessment": [{"text": "Exit ticket: write 3 numbers", "citations": c}], "feedback": "Praise strategy use."})
+        d = {"status": status, "grade": grade, "subject": subject, "reason": "not covered"}
+    else:
+        c = list(cites)
+        d = {"status": "ok", "grade": grade, "subject": subject, "outcome_id": "MA-3.1.1.1", "title": "Place value",
+             "planning": {"objectives": [{"objective_id": "O1", "text": "Read numbers to thousands", "citations": c}],
+                          "lesson_sequence": [{"step": 1, "description": "Base-ten blocks warm-up", "minutes": 10,
+                                               "objective_ids": [obj_ref], "citations": c}]},
+             "differentiation": {"support": [{"description": "Use a place value chart", "objective_ids": ["O1"], "citations": c}],
+                                 "extension": [{"description": "Five-digit numbers", "objective_ids": ["O1"], "citations": []}]},
+             "assessment": {"questions": [{"question_id": "Q1", "question": "What is the value of 4 in 3,482?",
+                                           "answer_key": "400", "objective_ids": ["O1"], "citations": c}]},
+             "feedback": {"templates": [{"answer_pattern": "Answers 4", "feedback": "Look at which column the 4 is in.",
+                                         "objective_ids": ["O1"], "citations": []}]},
+             "reason": ""}
+    return d if as_dict else json.dumps(d)
+
+
+lesson = pack  # backwards-compatible name

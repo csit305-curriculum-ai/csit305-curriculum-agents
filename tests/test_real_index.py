@@ -22,3 +22,13 @@ def test_grade3_place_value_outcome_retrieved(real):
 def test_off_curriculum_query_refused(real):
     b = real.retrieve("the causes of the French Revolution", "maths", 3)
     assert b.status == "insufficient_evidence"
+
+
+def test_timss_not_indexed_so_science_refused(real):
+    b = real.retrieve("water cycle", "science", 4)
+    assert b.status == "insufficient_evidence" and "no indexed evidence" in b.reason  # DEC 012
+
+
+def test_outcome_chunk_carries_pages(real):
+    b = real.retrieve("adding multi-digit whole numbers", "maths", 4, outcome_id="MA-4.2.5.1")
+    assert b.status == "ok" and "MA-4.2.5.1" in b.chunks[0]["outcome_ids"] and b.chunks[0]["pages"]
