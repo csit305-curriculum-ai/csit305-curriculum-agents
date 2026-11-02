@@ -1,0 +1,8 @@
+{
+ "removed_records": 1,
+ "in_modified_records": false,
+ "in_modified_chunk_text": false,
+ "target": "MA-4.2.5.1",
+ "original_sha256": "5ffb7c39bbb5562e8f8a077b9d75af0458bb04e5e2fd6f6b3245d18a792dc1a4",
+ "modified_sha256": "b8ca9ba5c3b2d00b160fdf808254a18c4ed8fe5c9b9fbc80f80ebe4e42d77840"
+}
