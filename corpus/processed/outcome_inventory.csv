@@ -434,5 +434,84 @@ MA-4.13.9.1,maths,4,Geometry,moe_math_scope_sequence_g1-12.pdf,30,evidence
 MA-4.13.11.1,maths,4,Geometry,moe_math_scope_sequence_g1-12.pdf,30,evidence
 MA-4.17.1.1,maths,4,Financial Mathematics,moe_math_scope_sequence_g1-12.pdf,30,evidence
 MA-4.17.2.1,maths,4,Financial Mathematics,moe_math_scope_sequence_g1-12.pdf,30,evidence
+SC-3.1.1.1.1,science,3,Nature of Science and Technology,moe_science_standards_2017_kg-12.pdf,51,evidence
+SC-3.1.1.1.2,science,3,Nature of Science and Technology,moe_science_standards_2017_kg-12.pdf,51,evidence
+SC-3.2.3.4.1,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,51,evidence
+SC-3.2.2.3.1,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,51,evidence
+SC-3.2.2.3.2,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,51,evidence
+SC-3.2.3.4.2,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.2.3.1,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.3.3.3,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.3.1.2,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.3.1.1,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.3.3.2,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.2.3.3.4,science,3,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,52,evidence
+SC-3.3.1.1.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,53,evidence
+SC-3.3.1.3.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,53,evidence
+SC-3.3.1.3.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,53,evidence
+SC-3.3.1.3.3,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,53,evidence
+SC-3.3.1.3.2,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.3.2.3.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.3.2.3.2,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.3.3.1.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.3.4.1.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.3.4.4.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,54,evidence
+SC-3.4.1.1.1,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.1.1.1,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.1.1.3,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.1.1.6,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.1.1.7,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.1.1.4,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.3.4.1.1,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.3.4.1.2,science,3,Life Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.2.2.1,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.4.2.4,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,55,evidence
+SC-3.4.2.2.2,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.2.2.4,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.2.2.5,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.2.2.3,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.1.2,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.1.1,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.1.3,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.1.2,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.2.6,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.2.7,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-3.4.3.2.8,science,3,Physical Sciences,moe_science_standards_2017_kg-12.pdf,56,evidence
+SC-4.1.1.1.3,science,4,Nature of Science and Technology,moe_science_standards_2017_kg-12.pdf,57,evidence
+SC-4.1.1.2.2,science,4,Nature of Science and Technology,moe_science_standards_2017_kg-12.pdf,57,evidence
+SC-4.2.2.1.1,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,58,evidence
+SC-4.2.2.1.2,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,58,evidence
+SC-4.2.2.1.1,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,58,evidence
+SC-4.2.2.1.1,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,58,evidence
+SC-4.2.3.1.1,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,59,evidence
+SC-4.4.4.2.2,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,59,evidence
+SC-4.4.4.2.1,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,59,evidence
+SC-4.4.1.1.1,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.2.1.1,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.1.4.3,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.1.3.3,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.1.1.2,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.1.1.1.1,science,4,Nature of Science and Technology,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.1.1.3,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,60,evidence
+SC-4.3.1.1.2,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,61,evidence
+SC-4.3.1.1.1,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,61,evidence
+SC-4.3.1.1.4,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,61,evidence
+SC-4.3.1.1.5,science,4,Life Sciences,moe_science_standards_2017_kg-12.pdf,61,evidence
+SC-4.4.1.1.2,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.1.1.5,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.1.1.4,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.1.1.3,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.1.1.3,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.3.2.1,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.3.2.2,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.2.3.4.1,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,62,evidence
+SC-4.4.3.2.3,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.3.2.4,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.3.1.6,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.2.1.1,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.2.1.3,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.2.1.2,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.4.3.1.3,science,4,Physical Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
+SC-4.2.3.4.2,science,4,Earth and Space Sciences,moe_science_standards_2017_kg-12.pdf,63,evidence
 TIMSS-MA-G4,maths,4,TIMSS Exhibit 1,timss2023_uae_encyclopedia.pdf,,context
 TIMSS-SC-C1,science,1|2|3|4,TIMSS Exhibit 3 (Cycle 1),timss2023_uae_encyclopedia.pdf,,context

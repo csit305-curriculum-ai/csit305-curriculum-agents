@@ -1,6 +1,5 @@
-"""TEST 001 (Doc 3 failure protocol), PROVISIONAL Maths variant (DEC 015).
-Doc 3 specifies a Grade 4 Science outcome; no English science evidence is indexed yet (DEC 012), so this runs the same
-procedure on a Grade 4 Maths outcome. Condition B only (C not built yet). No API call is possible: a MockClient with no
+"""TEST 001 (Doc 3 failure protocol). Default target is the Grade 4 Science outcome SC-4.4.3.2.2 (DEC 016), as Doc 3
+specifies; pass MA-4.2.5.1 to repeat the earlier provisional Maths variant (DEC 015). Condition B only (C not built yet). No API call is possible: a MockClient with no
 scripted outputs raises if generation is ever called.
 Usage: cd src && ../.venv/bin/python ../scripts/test001_missing_outcome.py [OUTCOME_ID]"""
 import csv, hashlib, json, sys, time
@@ -12,11 +11,14 @@ from cagents.conditions import TraceLogger, run_condition
 from cagents.llm import MockClient
 from cagents.retrieval import ROOT, BGEM3Embedder, HFTokenizerAdapter, Index
 
-TARGET = sys.argv[1] if len(sys.argv) > 1 else "MA-4.2.5.1"
-TASK = {"task_id": "TEST001", "grade": 4, "subject": "maths", "outcome_id": TARGET, "topic": "Adding multi-digit whole numbers"}
-EXPECTED = ("I could not find verified Grade 4 Maths evidence for this outcome in the selected documents. "
-            "Please add the relevant curriculum source or choose a supported outcome.")
-OUT = ROOT / "runs" / "test001"
+TARGET = sys.argv[1] if len(sys.argv) > 1 else "SC-4.4.3.2.2"
+SCI = TARGET.startswith("SC-")
+SUBJECT = "science" if SCI else "maths"
+TASK = {"task_id": "TEST001", "grade": 4, "subject": SUBJECT, "outcome_id": TARGET,
+        "topic": "Designing a simple working electrical circuit" if SCI else "Adding multi-digit whole numbers"}
+EXPECTED = (f"I could not find verified Grade 4 {'Science' if SCI else 'Maths'} evidence for this outcome in the selected "
+            "documents. Please add the relevant curriculum source or choose a supported outcome.")
+OUT = ROOT / "runs" / ("test001_science" if SCI else "test001")
 
 
 def h(records):
@@ -39,7 +41,7 @@ def main():
     logger, rows = TraceLogger(OUT / "trace.jsonl"), []
     for i in range(1, 11):
         t0 = time.perf_counter()
-        b = idx.retrieve(TASK["topic"], "maths", 4, outcome_id=TARGET)
+        b = idx.retrieve(TASK["topic"], SUBJECT, 4, outcome_id=TARGET)
         client = MockClient([])
         r = run_condition(TASK, "B", client, logger, bundle=b, repeat=i)
         ok = (r["status"] == "insufficient_evidence" and not client.calls and r["displayed_message"] == EXPECTED)

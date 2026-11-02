@@ -98,10 +98,76 @@ def parse_timss(path: Path) -> list[dict]:
     return out
 
 
+SCI_CODE = re.compile(r"^G([34])\.(\d)\.(\d)\.(\d+)\.(\d+)$")
+SCI_DOMAINS = {"1": "Nature of Science and Technology", "2": "Earth and Space Sciences", "3": "Life Sciences", "4": "Physical Sciences"}
+SCI_PAGES = range(51, 64)  # Grade 3 (pp. 51-56) and Grade 4 (pp. 57-63); Grades 1-2 are Arabic-only in this file
+
+
+def _bbox_words(path: Path, pg: int) -> list[tuple[float, float, float, str]]:
+    import html
+    x = subprocess.run(["pdftotext", "-bbox", "-f", str(pg), "-l", str(pg), str(path), "-"], capture_output=True, text=True, check=True).stdout
+    return [(float(a), float(b), float(c), html.unescape(t)) for a, b, c, t in
+            re.findall(r'xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="[\d.]+">([^<]*)</word>', x)]
+
+
+def parse_science_standards(path: Path) -> list[dict]:
+    """MoE Science National Curriculum Standards KG-12 (2017). Grade 3-4 learning outcomes are in English in the
+    left column, with a five-part code (e.g. G3.2.3.3.2) in the next column. Uses word coordinates so the
+    outcome column is not cut off by the neighbouring standard column. Arabic headers are ignored."""
+    recs, cur = [], None
+    for pg in SCI_PAGES:
+        W = _bbox_words(path, pg)
+        codes = [w for w in W if SCI_CODE.match(w[3])]
+        if not codes:
+            continue
+        xs = [w[0] for w in codes]
+        xc = max(xs, key=lambda v: sum(abs(v - u) < 8 for u in xs))  # x of the outcome-code column
+        col = sorted((w for w in codes if abs(w[0] - xc) < 8), key=lambda w: w[1])
+        left = sorted((w for w in W if w[2] < xc - 2 and not ARABIC.search(w[3])), key=lambda w: (round(w[1]), w[0]))
+        lines: list[list] = []
+        for w in left:
+            if lines and abs(lines[-1][0] - w[1]) < 3:
+                lines[-1][1].append(w)
+            else:
+                lines.append([w[1], [w]])
+        used: set[int] = set()
+        for y, ws in lines:
+            toks = [w[3] for w in sorted(ws, key=lambda w: w[0])]
+            if re.fullmatch(r"\d+", " ".join(toks)):
+                continue  # page number
+            start = None
+            if SCI_CODE.match(toks[0]):
+                start, toks = toks[0], toks[1:]  # code written inline at the start of the outcome
+            else:
+                for i, c in enumerate(col):
+                    if i not in used and abs(c[1] - y) < 4:
+                        start = c[3]; used.add(i); break
+            if start:
+                cur = {"code": start, "page": pg, "text": " ".join(toks)}
+                recs.append(cur)
+            elif cur:
+                cur["text"] += " " + " ".join(toks)
+    out, seen = [], set()
+    for r in recs:
+        text = clean(r["text"])
+        if out and out[-1]["text"].endswith(",") and text[:1].islower():  # a sentence split across two code rows
+            out[-1]["text"] += " " + text
+            continue
+        m = SCI_CODE.match(r["code"])
+        key = (r["code"], text)
+        if len(text) < 15 or key in seen:  # the source repeats some outcomes on consecutive rows
+            continue
+        seen.add(key)
+        out.append({"subject": "science", "grades": [int(m.group(1))], "domain": SCI_DOMAINS.get(m.group(2), m.group(2)),
+                    "outcome_id": "SC-" + r["code"][1:], "text": text, "page": r["page"]})
+    return out
+
+
 # role "evidence" = indexed for generation; "context" = parsed for the paper's background only.
 # Doc 3: "the TIMSS chapter is contextual evidence and is not a substitute for those files" (DEC 012).
 SOURCES = {
     "moe_math_scope_sequence_g1-12.pdf": (parse_math, "evidence"),
+    "moe_science_standards_2017_kg-12.pdf": (parse_science_standards, "evidence"),  # DEC 016
     "timss2023_uae_encyclopedia.pdf": (parse_timss, "context"),
     # moe_science_framework_2019-20.pdf: Grades 1-4 outcomes are Arabic-only (DEC 007); hashed, not parsed.
 }

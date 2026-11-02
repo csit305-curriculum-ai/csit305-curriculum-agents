@@ -24,9 +24,20 @@ def test_off_curriculum_query_refused(real):
     assert b.status == "insufficient_evidence"
 
 
-def test_timss_not_indexed_so_science_refused(real):
+def test_grade4_science_outcome_retrieved(real):  # DEC 016: MoE Science Standards 2017 indexed
+    b = real.retrieve("designing a simple working electrical circuit", "science", 4, outcome_id="SC-4.4.3.2.2")
+    assert b.status == "ok", b.reason
+    assert "SC-4.4.3.2.2" in b.chunks[0]["outcome_ids"] and all("-sc-g4-" in c for c in b.chunk_ids)
+
+
+def test_timss_context_never_retrieved(real):  # DEC 012: TIMSS stays context only
     b = real.retrieve("water cycle", "science", 4)
-    assert b.status == "insufficient_evidence" and "no indexed evidence" in b.reason  # DEC 012
+    assert all("timss" not in c for c in b.chunk_ids)
+
+
+def test_unknown_science_outcome_refused(real):
+    b = real.retrieve("water cycle", "science", 4, outcome_id="SC-4.9.9.9.9")
+    assert b.status == "insufficient_evidence"
 
 
 def test_outcome_chunk_carries_pages(real):

@@ -15,6 +15,12 @@
    "sha256": "5cddac03fe5b114960a5bfcea696cda3a90f991bcbe88991571a291274d6af59",
    "role": "context",
    "pages": 13
+  },
+  "moe_science_standards_2017_kg-12.pdf": {
+   "sha256": "0012128f6ff6c333f37bd8f6a35f4cb450dbd0b5a692a67d12de61761b443222",
+   "role": "evidence",
+   "pages": 308,
+   "accessed": "2026-11-02"
   }
  }
 }

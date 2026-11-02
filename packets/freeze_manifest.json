@@ -1,6 +1,6 @@
 {
- "tasks_yaml_sha256": "a2f409acdaeeacb2cf3ed735d2c4f6339a2eb0647df7bf30ab5e882ec1f4815f",
- "corpus_hash": "2bb1e02b68244571ae9c0d51ac4aa89b20bbb50659cdf585a49e8b2e64d2b5d9",
+ "tasks_yaml_sha256": "6f254f424ae68808600c1e97247cc030217036ec560802d1c6baa0d738d12e7b",
+ "corpus_hash": "6fed5bf077087787bcc89d285c9dbcd0d34ebf03e0d7d4bb6b7af39739b5634d",
  "packages": [
   "Jinja2==3.1.6",
   "MarkupSafe==3.0.3",
@@ -115,7 +115,7 @@
  "packets": {
   "G3M-P1": {
    "status": "ok",
-   "bundle_hash": "2e061772c81a1ae35ddb1122acb219777281dae7a55ec4b8741cd56d980a6012",
+   "bundle_hash": "ca30bd44fc29b9f03275396719425d143abb17c6b350576fa5a669cb978de1e1",
    "chunk_ids": [
     "moe-ma-g3-000",
     "moe-ma-g3-001",
@@ -127,7 +127,7 @@
   },
   "G3M-01": {
    "status": "ok",
-   "bundle_hash": "05743279f3646b79d3501bf1554eecb40ea11305e5a285af0dd72b94a9c70fb7",
+   "bundle_hash": "d1714c73103a448a204b7fbbcbd25322082d069d073f96ea6d22110ff5f12288",
    "chunk_ids": [
     "moe-ma-g3-001",
     "moe-ma-g3-006",
@@ -139,7 +139,7 @@
   },
   "G3M-02": {
    "status": "ok",
-   "bundle_hash": "320cc9db7b160ba060f6e70dd8e0095549815096c07838543d4e50a739a236f6",
+   "bundle_hash": "780f51dca67db39f4b38aac750853ba49953cc1bb75d7139a19a0f4b836a2a5a",
    "chunk_ids": [
     "moe-ma-g3-001",
     "moe-ma-g3-002",
@@ -151,7 +151,7 @@
   },
   "G3M-03": {
    "status": "ok",
-   "bundle_hash": "c6bd17873f0a1de538b9191949dad973487c905731c554f393d5a3137270c2ca",
+   "bundle_hash": "9cecde20e0c04352da23277563827277868b2d28e93fed99c17b964c012e56d7",
    "chunk_ids": [
     "moe-ma-g3-007",
     "moe-ma-g3-006",
@@ -163,7 +163,7 @@
   },
   "G3M-04": {
    "status": "ok",
-   "bundle_hash": "e86b21d466156d6a9a8b8e76f9c5375dd63b242e087a5ec909e9194695c26c0b",
+   "bundle_hash": "daeb3b1cc516abc4eb7dae9474a4cdd34f41e98bf3792ecb5a827da46e4b01a7",
    "chunk_ids": [
     "moe-ma-g3-008",
     "moe-ma-g3-010",
@@ -175,7 +175,7 @@
   },
   "G3M-05": {
    "status": "ok",
-   "bundle_hash": "6f50f93781187a9ac1b615fe54004f8f62e1e677bf97ca30e2caf7038521b8ce",
+   "bundle_hash": "0bc9dd73a440d39a52f9e12992f497286747ea6768c1c5b4930c919aa145734f",
    "chunk_ids": [
     "moe-ma-g3-010",
     "moe-ma-g3-009",
@@ -187,7 +187,7 @@
   },
   "G4M-P1": {
    "status": "ok",
-   "bundle_hash": "79bb1f76735caff6289dbca325d1e87697bf7e7259cb294f62f7cdd4bfbe7214",
+   "bundle_hash": "3ca2c2a23d807c9a3db480b4a91c238ce4b23f8380d4e00fb87e162612e06e99",
    "chunk_ids": [
     "moe-ma-g4-001",
     "moe-ma-g4-000",
@@ -199,7 +199,7 @@
   },
   "G4M-01": {
    "status": "ok",
-   "bundle_hash": "7a7a07dd9d014121bc87449cc78ab62331fb3b8df2f8040e6971b11f5c572962",
+   "bundle_hash": "33dbb238fe0cce74f793e2f8a5aee9f47b0572fda3c122840107b3098a63ea8b",
    "chunk_ids": [
     "moe-ma-g4-003",
     "moe-ma-g4-004",
@@ -211,7 +211,7 @@
   },
   "G4M-02": {
    "status": "ok",
-   "bundle_hash": "102e9ca6360286be31547b20ee93fcb7bec79b1268d20f75f459a10b2b2a9510",
+   "bundle_hash": "93cdb84ba8a78c41718f8999c66b4cd27200288be6deeaeb0b2b0887a8c86272",
    "chunk_ids": [
     "moe-ma-g4-007",
     "moe-ma-g4-008",
@@ -223,7 +223,7 @@
   },
   "G4M-03": {
    "status": "ok",
-   "bundle_hash": "4778e892909e58ed0def17ce857797b7b497487e88c7ba77d8ca9a39e1f9d8ff",
+   "bundle_hash": "217e4583acec4223c5492c6180ccef60908d75f6a7d7f2a0055558fc31faeb94",
    "chunk_ids": [
     "moe-ma-g4-009",
     "moe-ma-g4-011",
@@ -235,7 +235,7 @@
   },
   "G4M-04": {
    "status": "ok",
-   "bundle_hash": "299e3131a75b262bbf038c33c3c5cce9db9c7425c0a9b7fe24c94a1f1edf69f9",
+   "bundle_hash": "661d8db959b4b00de9d691949fd81e58872e9d2b8f602ca454af5a67c58adaa1",
    "chunk_ids": [
     "moe-ma-g4-013",
     "moe-ma-g4-012",
@@ -247,7 +247,7 @@
   },
   "G4M-05": {
    "status": "ok",
-   "bundle_hash": "fea4dd2dc6ad9e95a255c3eda1493864349901d23ecf873a0639544bb785c4d4",
+   "bundle_hash": "45be61b7fc8c188249fce47167fd0a3cfe778df2fdc1d4b3d149b3b6c8c37496",
    "chunk_ids": [
     "moe-ma-g4-014",
     "moe-ma-g4-000",
@@ -258,76 +258,148 @@
    "reason": ""
   },
   "G3S-P1": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "648fe31b67af22ce100f99fa32fec6a946dbec2236031fc05ef438904a5a772a",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "6a5910e10fb175c5ea9d91dd5634aafca21b13b229cac176a31fddaae6eadb2c",
+   "chunk_ids": [
+    "moe-sc-g3-002",
+    "moe-sc-g3-003",
+    "moe-sc-g3-001",
+    "moe-sc-g3-004",
+    "moe-sc-g3-000"
+   ],
+   "reason": ""
   },
   "G3S-01": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "f655d64596ed537e71de42fba552ccca554049cef4d44537355873aaa127cfad",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "6f8831e5eb54e37145d6920a0ec1661c10730a43791047050ab31762a3a51fbc",
+   "chunk_ids": [
+    "moe-sc-g3-004",
+    "moe-sc-g3-003",
+    "moe-sc-g3-005",
+    "moe-sc-g3-001",
+    "moe-sc-g3-006"
+   ],
+   "reason": ""
   },
   "G3S-02": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "b1c9c3568432dd86d233dba3abcb4d6252cae126ee787ffdda0a7294f1f395e9",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "04dc26b5bb948f5a82d713492249f3ac119e128bbe6b1e2b730cd8a0c8002d8a",
+   "chunk_ids": [
+    "moe-sc-g3-002",
+    "moe-sc-g3-003",
+    "moe-sc-g3-001",
+    "moe-sc-g3-005",
+    "moe-sc-g3-004"
+   ],
+   "reason": ""
   },
   "G3S-03": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "a9ce07ea3341b86bc8c881dcca7c9c3441f7875815fe39a402e028bd3110155a",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "5deeb391d3ae036a679ffe44201187f64eb27254fb74436646a38d043c78bf37",
+   "chunk_ids": [
+    "moe-sc-g3-005",
+    "moe-sc-g3-004",
+    "moe-sc-g3-006",
+    "moe-sc-g3-002",
+    "moe-sc-g3-001"
+   ],
+   "reason": ""
   },
   "G3S-04": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "4ed5ab5c5b88bd77b6ecac6e728dc6c7f203f39a4043576509e4bdcbdf6e1987",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "b7931a9ef5ea12409acf73ac45fe096a8331c6609d12f4f681ebfde2e442eabb",
+   "chunk_ids": [
+    "moe-sc-g3-001",
+    "moe-sc-g3-000",
+    "moe-sc-g3-005",
+    "moe-sc-g3-002",
+    "moe-sc-g3-003"
+   ],
+   "reason": ""
   },
   "G3S-05": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "1f4f9860e00d00ce805a6759fc1acc6bb57b9e2cf18585260b09e3858dae1bb8",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 3 science"
+   "status": "ok",
+   "bundle_hash": "57bea3b458055ea7aff0745861aad164b6a52c9712749858b6b914f2b2c80a1e",
+   "chunk_ids": [
+    "moe-sc-g3-000",
+    "moe-sc-g3-005",
+    "moe-sc-g3-001",
+    "moe-sc-g3-006",
+    "moe-sc-g3-004"
+   ],
+   "reason": ""
   },
   "G4S-P1": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "bd12d659b8399ee80a5b843e5f2f54aa0b41cbc1f9958ec7567e31fb5966353d",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "2cf5d2bc9b7808ab6934e45cfd5093aafd19fedf7de5a59af77d47dc75df95bb",
+   "chunk_ids": [
+    "moe-sc-g4-006",
+    "moe-sc-g4-001",
+    "moe-sc-g4-002",
+    "moe-sc-g4-000",
+    "moe-sc-g4-005"
+   ],
+   "reason": ""
   },
   "G4S-01": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "7113994aa626184e6af685ce6bdab0c312549c26e3af5c0066cbf020f70e9822",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "9124d8934a3e09a80939fddf5e1fd8185ddc0439d4e9e209cf6e74fc4a857ee0",
+   "chunk_ids": [
+    "moe-sc-g4-005",
+    "moe-sc-g4-001",
+    "moe-sc-g4-002",
+    "moe-sc-g4-004",
+    "moe-sc-g4-000"
+   ],
+   "reason": ""
   },
   "G4S-02": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "10d2476d538fb458384f75812b6311dbbc8b2748574b4e3083632c42b820f209",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "711e9bd1681b57b70b7a78f1bbad8e4a6d320a4fcbdaf539e1e3b5118dad1bd7",
+   "chunk_ids": [
+    "moe-sc-g4-001",
+    "moe-sc-g4-005",
+    "moe-sc-g4-000",
+    "moe-sc-g4-004",
+    "moe-sc-g4-006"
+   ],
+   "reason": ""
   },
   "G4S-03": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "13af0ecf9720e1b07d73e3af04f02480453903f3e9602e3c4359421b915e99a3",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "1d6aed94ad0e497c1875dc359e62f0ccbfd2ae264177aaa1886cafdaed1379f1",
+   "chunk_ids": [
+    "moe-sc-g4-005",
+    "moe-sc-g4-000",
+    "moe-sc-g4-001",
+    "moe-sc-g4-002",
+    "moe-sc-g4-004"
+   ],
+   "reason": ""
   },
   "G4S-04": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "8060d3ba3dd770c22c27f84b1c2f6c4b0720d6671a2612734d45b2436d3e7fda",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "4ca30aa7419dd28d895ac1ffc6dc271baf4fded7f90602e15e73fc2c6224de6c",
+   "chunk_ids": [
+    "moe-sc-g4-000",
+    "moe-sc-g4-001",
+    "moe-sc-g4-005",
+    "moe-sc-g4-002",
+    "moe-sc-g4-004"
+   ],
+   "reason": ""
   },
   "G4S-05": {
-   "status": "insufficient_evidence",
-   "bundle_hash": "ddf3512fca4e4666bdf917bb72d540d5f550a22e58ff595ac39a8859cfb3a9a8",
-   "chunk_ids": [],
-   "reason": "no indexed evidence for Grade 4 science"
+   "status": "ok",
+   "bundle_hash": "69821ba40378331a9288f7f16bd7e5d6f0253f1700d413580cea2537238de19d",
+   "chunk_ids": [
+    "moe-sc-g4-003",
+    "moe-sc-g4-002",
+    "moe-sc-g4-001",
+    "moe-sc-g4-004",
+    "moe-sc-g4-005"
+   ],
+   "reason": ""
   }
  }
 }

@@ -2,11 +2,10 @@
 # Structure follows Document 3 v0.2 T3: per grade-subject cell, 5 main tasks + 1 pilot task
 # = 20 main + 4 pilot. Pilot tasks are for tuning prompts only and are excluded from analysis.
 # Maths outcome IDs come from the MoE Maths Scope and Sequence G1-12 (prefixed "MA-").
-# Science (audit 2 Nov, DEC 012): TIMSS is context only, so science tasks are refused by the coverage gate
-# until an English MoE Grade 3-4 science source is confirmed.
-# Original note: no English grade-specific MoE outcome list was found, so science tasks have outcome_id: null
-# and are grounded only in the TIMSS 2023 Cycle 1 science content (TIMSS-SC-C1). The group must decide
-# whether to replace these once an English Grade 3-4 science outcome source is found (see corpus/SOURCES.md).
+# Science (2 Nov, DEC 016): outcome IDs "SC-" + code from the MoE Science National Curriculum Standards KG-12 (2017),
+# English Grade 3-4 outcomes. Chosen after coverage was confirmed (Doc 3). Codes reused for different text in the source were avoided.
+# Science topics were re-worded on 2 Nov to match these outcomes; the group should review them (DEC 016).
+# (Earlier drafts had outcome_id: null because no English source had been found; that claim was wrong.)
 # Review checklist: topic suits the grade? outcome ID matches the topic? context realistic for UAE classes?
 version: 0.1-draft
 status: draft_for_group_review
@@ -28,17 +27,17 @@ tasks:
   - {task_id: G4M-03, split: main, grade: 4, subject: maths, outcome_id: MA-4.10.1.1, topic: "Modelling decimals with place-value charts and grids"}
   - {task_id: G4M-04, split: main, grade: 4, subject: maths, outcome_id: MA-4.13.3.1, topic: "Concepts of angles and angle measurement"}
   - {task_id: G4M-05, split: main, grade: 4, subject: maths, outcome_id: MA-4.17.1.1, topic: "Value of coins and bills (financial literacy)"}
-  # ---------- Grade 3 Science (outcome IDs pending; see header) ----------
-  - {task_id: G3S-P1, split: pilot, grade: 3, subject: science, outcome_id: null, topic: "Living and non-living things"}
-  - {task_id: G3S-01, split: main, grade: 3, subject: science, outcome_id: null, topic: "Properties and states of matter"}
-  - {task_id: G3S-02, split: main, grade: 3, subject: science, outcome_id: null, topic: "Plant and animal growth and life cycles"}
-  - {task_id: G3S-03, split: main, grade: 3, subject: science, outcome_id: null, topic: "Pushes, pulls and changes in motion"}
-  - {task_id: G3S-04, split: main, grade: 3, subject: science, outcome_id: null, topic: "Weather patterns and seasons in the UAE"}
-  - {task_id: G3S-05, split: main, grade: 3, subject: science, outcome_id: null, topic: "Using simple investigation tools and recording observations"}
+  # ---------- Grade 3 Science (MoE Science Standards 2017, DEC 016; topics re-worded to match the outcome) ----------
+  - {task_id: G3S-P1, split: pilot, grade: 3, subject: science, outcome_id: SC-3.3.1.3.2, topic: "Characteristics of different groups of plants and animals"}
+  - {task_id: G3S-01, split: main, grade: 3, subject: science, outcome_id: SC-3.4.1.1.1, topic: "Properties of solids, liquids and gases"}
+  - {task_id: G3S-02, split: main, grade: 3, subject: science, outcome_id: SC-3.3.1.3.3, topic: "Life cycles of living organisms: birth, growth, reproduction and death"}
+  - {task_id: G3S-03, split: main, grade: 3, subject: science, outcome_id: SC-3.4.2.2.4, topic: "How simple machines reduce the force needed to move objects"}
+  - {task_id: G3S-04, split: main, grade: 3, subject: science, outcome_id: SC-3.2.3.1.1, topic: "Using tables and graphs to describe typical weather in each season"}
+  - {task_id: G3S-05, split: main, grade: 3, subject: science, outcome_id: SC-3.1.1.1.1, topic: "Tools scientists use for accurate measurements and observations"}
   # ---------- Grade 4 Science (outcome IDs pending; see header) ----------
-  - {task_id: G4S-P1, split: pilot, grade: 4, subject: science, outcome_id: null, topic: "The water cycle and Earth's systems"}
-  - {task_id: G4S-01, split: main, grade: 4, subject: science, outcome_id: null, topic: "Energy sources and energy transfer in daily life"}
-  - {task_id: G4S-02, split: main, grade: 4, subject: science, outcome_id: null, topic: "Properties of light and how it interacts with objects"}
-  - {task_id: G4S-03, split: main, grade: 4, subject: science, outcome_id: null, topic: "Human impact on Earth and scarcity of fresh water"}
-  - {task_id: G4S-04, split: main, grade: 4, subject: science, outcome_id: null, topic: "Earth's place in the solar system: day, night and seasons"}
-  - {task_id: G4S-05, split: main, grade: 4, subject: science, outcome_id: null, topic: "Ecosystems: how living things obtain energy"}
+  - {task_id: G4S-P1, split: pilot, grade: 4, subject: science, outcome_id: SC-4.2.3.4.2, topic: "Water on Earth's surface and water in the atmosphere"}
+  - {task_id: G4S-01, split: main, grade: 4, subject: science, outcome_id: SC-4.4.3.2.2, topic: "Designing a simple working electrical circuit"}
+  - {task_id: G4S-02, split: main, grade: 4, subject: science, outcome_id: SC-4.4.4.2.1, topic: "Light travels in straight lines, reflects and refracts"}
+  - {task_id: G4S-03, split: main, grade: 4, subject: science, outcome_id: SC-4.2.3.4.1, topic: "Distribution of water and fresh water on Earth"}
+  - {task_id: G4S-04, split: main, grade: 4, subject: science, outcome_id: SC-4.2.2.1.2, topic: "Daily and seasonal patterns of shadows, day and night"}
+  - {task_id: G4S-05, split: main, grade: 4, subject: science, outcome_id: SC-4.3.1.1.3, topic: "How human body systems work together"}
