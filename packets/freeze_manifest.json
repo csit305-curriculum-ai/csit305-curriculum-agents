@@ -1,0 +1,333 @@
+{
+ "tasks_yaml_sha256": "a2f409acdaeeacb2cf3ed735d2c4f6339a2eb0647df7bf30ab5e882ec1f4815f",
+ "corpus_hash": "2bb1e02b68244571ae9c0d51ac4aa89b20bbb50659cdf585a49e8b2e64d2b5d9",
+ "packages": [
+  "Jinja2==3.1.6",
+  "MarkupSafe==3.0.3",
+  "PyPika==0.51.1",
+  "PyYAML==6.0.3",
+  "Pygments==2.21.0",
+  "aiohappyeyeballs==2.7.1",
+  "aiohttp-retry==2.9.1",
+  "aiohttp==3.14.5",
+  "aiosignal==1.4.0",
+  "annotated-doc==0.0.5",
+  "annotated-types==0.8.0",
+  "anyio==4.16.0",
+  "attrs==26.1.0",
+  "bcrypt==5.0.0",
+  "build==1.6.1",
+  "certifi==2026.10.23",
+  "charset-normalizer==3.5.2",
+  "chromadb==1.5.9",
+  "click==8.5.0",
+  "cloudpickle==3.1.2",
+  "durationpy==0.11",
+  "filelock==4.2.4",
+  "flatbuffers==25.12.19",
+  "frozenlist==1.8.0",
+  "fsspec==2026.9.0",
+  "googleapis-common-protos==1.76.0",
+  "grpcio==1.85.1",
+  "h11==0.16.0",
+  "hf-xet==1.8.0",
+  "httpcore2==2.16.0",
+  "httpcore==1.0.9",
+  "httptools==0.9.0",
+  "httpx2==2.16.0",
+  "httpx==0.28.1",
+  "huggingface_hub==2.4.0",
+  "idna==3.20",
+  "importlib_resources==7.1.0",
+  "iniconfig==2.3.1",
+  "jiter==0.18.0",
+  "joblib==1.6.0",
+  "jsonschema-specifications==2025.9.1",
+  "jsonschema==4.26.0",
+  "kubernetes==37.0.1",
+  "markdown-it-py==4.2.0",
+  "mdurl==0.1.2",
+  "mmh3==5.3.1",
+  "mpmath==1.3.0",
+  "multidict==7.2.1",
+  "narwhals==2.28.0",
+  "networkx==3.6.1",
+  "numpy==2.4.6",
+  "oauthlib==4.0.1",
+  "onnxruntime==1.31.1",
+  "openai==3.42.1",
+  "opentelemetry-api==1.45.2",
+  "opentelemetry-exporter-otlp-common==0.66b2",
+  "opentelemetry-exporter-otlp-proto-common==1.45.2",
+  "opentelemetry-exporter-otlp-proto-grpc==1.45.2",
+  "opentelemetry-proto==1.45.2",
+  "opentelemetry-sdk==1.45.2",
+  "opentelemetry-semantic-conventions==0.66b2",
+  "orjson==3.13.0",
+  "overrides==7.7.0",
+  "packaging==26.3",
+  "pluggy==1.7.0",
+  "propcache==0.5.4",
+  "protobuf==7.36.2",
+  "pybase64==1.5.1",
+  "pydantic-settings==2.16.2",
+  "pydantic==2.14.2",
+  "pydantic_core==2.50.2",
+  "pypdf==6.21.4",
+  "pyproject_hooks==1.3.3",
+  "pytest==9.2.0",
+  "python-dateutil==4.0.0",
+  "python-dotenv==1.2.4",
+  "referencing==0.37.0",
+  "regex==2026.9.29",
+  "requests-oauthlib==2.0.0",
+  "requests==2.34.2",
+  "rich==15.0.0",
+  "rpds-py==2026.9.1",
+  "safetensors==0.8.0",
+  "scikit-learn==1.9.1",
+  "scipy==1.17.1",
+  "sentence-transformers==6.2.0",
+  "setuptools==78.1.0",
+  "shellingham==1.5.4",
+  "sniffio==1.3.1",
+  "sympy==1.14.0",
+  "tenacity==9.2.1",
+  "threadpoolctl==3.7.0",
+  "tiktoken==0.14.0",
+  "tokenizers==0.23.3",
+  "torch==2.15.0+cpu",
+  "tqdm==4.70.1",
+  "transformers==5.22.1",
+  "truststore==0.10.5",
+  "typer==0.27.3",
+  "typing-inspection==0.4.4",
+  "typing_extensions==4.16.0",
+  "tzdata==2026.6",
+  "urllib3==2.8.0",
+  "uvicorn==0.54.0",
+  "uvloop==0.23.0",
+  "watchfiles==1.3.0",
+  "websocket-client==1.9.2",
+  "websockets==17.4",
+  "yarl==1.25.1"
+ ],
+ "packets": {
+  "G3M-P1": {
+   "status": "ok",
+   "bundle_hash": "2e061772c81a1ae35ddb1122acb219777281dae7a55ec4b8741cd56d980a6012",
+   "chunk_ids": [
+    "moe-ma-g3-000",
+    "moe-ma-g3-001",
+    "moe-ma-g3-004",
+    "moe-ma-g3-007",
+    "moe-ma-g3-002"
+   ],
+   "reason": ""
+  },
+  "G3M-01": {
+   "status": "ok",
+   "bundle_hash": "05743279f3646b79d3501bf1554eecb40ea11305e5a285af0dd72b94a9c70fb7",
+   "chunk_ids": [
+    "moe-ma-g3-001",
+    "moe-ma-g3-006",
+    "moe-ma-g3-005",
+    "moe-ma-g3-003",
+    "moe-ma-g3-002"
+   ],
+   "reason": ""
+  },
+  "G3M-02": {
+   "status": "ok",
+   "bundle_hash": "320cc9db7b160ba060f6e70dd8e0095549815096c07838543d4e50a739a236f6",
+   "chunk_ids": [
+    "moe-ma-g3-001",
+    "moe-ma-g3-002",
+    "moe-ma-g3-003",
+    "moe-ma-g3-004",
+    "moe-ma-g3-006"
+   ],
+   "reason": ""
+  },
+  "G3M-03": {
+   "status": "ok",
+   "bundle_hash": "c6bd17873f0a1de538b9191949dad973487c905731c554f393d5a3137270c2ca",
+   "chunk_ids": [
+    "moe-ma-g3-007",
+    "moe-ma-g3-006",
+    "moe-ma-g3-010",
+    "moe-ma-g3-002",
+    "moe-ma-g3-000"
+   ],
+   "reason": ""
+  },
+  "G3M-04": {
+   "status": "ok",
+   "bundle_hash": "e86b21d466156d6a9a8b8e76f9c5375dd63b242e087a5ec909e9194695c26c0b",
+   "chunk_ids": [
+    "moe-ma-g3-008",
+    "moe-ma-g3-010",
+    "moe-ma-g3-003",
+    "moe-ma-g3-002",
+    "moe-ma-g3-007"
+   ],
+   "reason": ""
+  },
+  "G3M-05": {
+   "status": "ok",
+   "bundle_hash": "6f50f93781187a9ac1b615fe54004f8f62e1e677bf97ca30e2caf7038521b8ce",
+   "chunk_ids": [
+    "moe-ma-g3-010",
+    "moe-ma-g3-009",
+    "moe-ma-g3-008",
+    "moe-ma-g3-007",
+    "moe-ma-g3-004"
+   ],
+   "reason": ""
+  },
+  "G4M-P1": {
+   "status": "ok",
+   "bundle_hash": "79bb1f76735caff6289dbca325d1e87697bf7e7259cb294f62f7cdd4bfbe7214",
+   "chunk_ids": [
+    "moe-ma-g4-001",
+    "moe-ma-g4-000",
+    "moe-ma-g4-004",
+    "moe-ma-g4-005",
+    "moe-ma-g4-006"
+   ],
+   "reason": ""
+  },
+  "G4M-01": {
+   "status": "ok",
+   "bundle_hash": "7a7a07dd9d014121bc87449cc78ab62331fb3b8df2f8040e6971b11f5c572962",
+   "chunk_ids": [
+    "moe-ma-g4-003",
+    "moe-ma-g4-004",
+    "moe-ma-g4-005",
+    "moe-ma-g4-006",
+    "moe-ma-g4-000"
+   ],
+   "reason": ""
+  },
+  "G4M-02": {
+   "status": "ok",
+   "bundle_hash": "102e9ca6360286be31547b20ee93fcb7bec79b1268d20f75f459a10b2b2a9510",
+   "chunk_ids": [
+    "moe-ma-g4-007",
+    "moe-ma-g4-008",
+    "moe-ma-g4-009",
+    "moe-ma-g4-010",
+    "moe-ma-g4-002"
+   ],
+   "reason": ""
+  },
+  "G4M-03": {
+   "status": "ok",
+   "bundle_hash": "4778e892909e58ed0def17ce857797b7b497487e88c7ba77d8ca9a39e1f9d8ff",
+   "chunk_ids": [
+    "moe-ma-g4-009",
+    "moe-ma-g4-011",
+    "moe-ma-g4-000",
+    "moe-ma-g4-010",
+    "moe-ma-g4-012"
+   ],
+   "reason": ""
+  },
+  "G4M-04": {
+   "status": "ok",
+   "bundle_hash": "299e3131a75b262bbf038c33c3c5cce9db9c7425c0a9b7fe24c94a1f1edf69f9",
+   "chunk_ids": [
+    "moe-ma-g4-013",
+    "moe-ma-g4-012",
+    "moe-ma-g4-011",
+    "moe-ma-g4-014",
+    "moe-ma-g4-010"
+   ],
+   "reason": ""
+  },
+  "G4M-05": {
+   "status": "ok",
+   "bundle_hash": "fea4dd2dc6ad9e95a255c3eda1493864349901d23ecf873a0639544bb785c4d4",
+   "chunk_ids": [
+    "moe-ma-g4-014",
+    "moe-ma-g4-000",
+    "moe-ma-g4-003",
+    "moe-ma-g4-012",
+    "moe-ma-g4-001"
+   ],
+   "reason": ""
+  },
+  "G3S-P1": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "648fe31b67af22ce100f99fa32fec6a946dbec2236031fc05ef438904a5a772a",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G3S-01": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "f655d64596ed537e71de42fba552ccca554049cef4d44537355873aaa127cfad",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G3S-02": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "b1c9c3568432dd86d233dba3abcb4d6252cae126ee787ffdda0a7294f1f395e9",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G3S-03": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "a9ce07ea3341b86bc8c881dcca7c9c3441f7875815fe39a402e028bd3110155a",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G3S-04": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "4ed5ab5c5b88bd77b6ecac6e728dc6c7f203f39a4043576509e4bdcbdf6e1987",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G3S-05": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "1f4f9860e00d00ce805a6759fc1acc6bb57b9e2cf18585260b09e3858dae1bb8",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 3 science"
+  },
+  "G4S-P1": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "bd12d659b8399ee80a5b843e5f2f54aa0b41cbc1f9958ec7567e31fb5966353d",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  },
+  "G4S-01": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "7113994aa626184e6af685ce6bdab0c312549c26e3af5c0066cbf020f70e9822",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  },
+  "G4S-02": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "10d2476d538fb458384f75812b6311dbbc8b2748574b4e3083632c42b820f209",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  },
+  "G4S-03": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "13af0ecf9720e1b07d73e3af04f02480453903f3e9602e3c4359421b915e99a3",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  },
+  "G4S-04": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "8060d3ba3dd770c22c27f84b1c2f6c4b0720d6671a2612734d45b2436d3e7fda",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  },
+  "G4S-05": {
+   "status": "insufficient_evidence",
+   "bundle_hash": "ddf3512fca4e4666bdf917bb72d540d5f550a22e58ff595ac39a8859cfb3a9a8",
+   "chunk_ids": [],
+   "reason": "no indexed evidence for Grade 4 science"
+  }
+ }
+}

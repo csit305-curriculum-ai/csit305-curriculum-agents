@@ -2,13 +2,17 @@
 # Structure follows Document 3 v0.2 T3: per grade-subject cell, 5 main tasks + 1 pilot task
 # = 20 main + 4 pilot. Pilot tasks are for tuning prompts only and are excluded from analysis.
 # Maths outcome IDs come from the MoE Maths Scope and Sequence G1-12 (prefixed "MA-").
-# Science: no English grade-specific MoE outcome list was found, so science tasks have outcome_id: null
+# Science (audit 2 Nov, DEC 012): TIMSS is context only, so science tasks are refused by the coverage gate
+# until an English MoE Grade 3-4 science source is confirmed.
+# Original note: no English grade-specific MoE outcome list was found, so science tasks have outcome_id: null
 # and are grounded only in the TIMSS 2023 Cycle 1 science content (TIMSS-SC-C1). The group must decide
 # whether to replace these once an English Grade 3-4 science outcome source is found (see corpus/SOURCES.md).
 # Review checklist: topic suits the grade? outcome ID matches the topic? context realistic for UAE classes?
 version: 0.1-draft
 status: draft_for_group_review
 default_context: "Mixed-ability class of 25 students, 45-minute lesson, English-medium UAE public school"
+# Doc 3 T4 UI fields: duration_min and needs apply to every task unless a task overrides them.
+defaults: {duration_min: 45, needs: "Mixed-ability class of 25; some pupils need language support; generic needs only, no pupil data"}
 tasks:
   # ---------- Grade 3 Maths ----------
   - {task_id: G3M-P1, split: pilot, grade: 3, subject: maths, outcome_id: MA-3.1.1.1, topic: "Place value of whole numbers through thousands"}

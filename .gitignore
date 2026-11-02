@@ -12,3 +12,5 @@ runs/*.jsonl
 corpus/processed/records.jsonl
 runs/**/trace.jsonl
 runs/**/bundle_*.json
+packets/*.json
+!packets/freeze_manifest.json
