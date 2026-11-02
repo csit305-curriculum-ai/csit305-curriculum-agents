@@ -1,0 +1,174 @@
+{
+ "in_scope": [
+  [
+   "maths",
+   3,
+   "place value of whole numbers through thousands",
+   0.5862
+  ],
+  [
+   "maths",
+   3,
+   "multiplication facts and arrays",
+   0.6171
+  ],
+  [
+   "maths",
+   3,
+   "understanding fractions as equal parts of a whole",
+   0.5793
+  ],
+  [
+   "maths",
+   3,
+   "telling time and elapsed time",
+   0.5291
+  ],
+  [
+   "maths",
+   3,
+   "area and perimeter of rectangles",
+   0.5968
+  ],
+  [
+   "maths",
+   4,
+   "multiplying two-digit numbers",
+   0.6344
+  ],
+  [
+   "maths",
+   4,
+   "equivalent fractions and comparing fractions",
+   0.6407
+  ],
+  [
+   "maths",
+   4,
+   "decimals tenths and hundredths",
+   0.5881
+  ],
+  [
+   "maths",
+   4,
+   "measuring angles",
+   0.6706
+  ],
+  [
+   "maths",
+   4,
+   "factors and multiples",
+   0.5718
+  ],
+  [
+   "science",
+   3,
+   "states of matter solids liquids and gases",
+   0.5315
+  ],
+  [
+   "science",
+   4,
+   "the water cycle and Earth's systems",
+   0.584
+  ],
+  [
+   "science",
+   3,
+   "plants and animals life cycles",
+   0.5231
+  ],
+  [
+   "science",
+   4,
+   "forces and motion of objects",
+   0.541
+  ],
+  [
+   "science",
+   4,
+   "energy sources and transfer",
+   0.5535
+  ]
+ ],
+ "out_of_scope": [
+  [
+   "maths",
+   3,
+   "the causes of the French Revolution",
+   0.3022
+  ],
+  [
+   "maths",
+   4,
+   "derivatives and integrals in calculus",
+   0.5293
+  ],
+  [
+   "maths",
+   3,
+   "quadratic equations and the discriminant",
+   0.4435
+  ],
+  [
+   "maths",
+   4,
+   "persuasive essay writing techniques",
+   0.3955
+  ],
+  [
+   "maths",
+   3,
+   "football match tactics",
+   0.4364
+  ],
+  [
+   "science",
+   3,
+   "Shakespeare's sonnets",
+   0.2742
+  ],
+  [
+   "science",
+   4,
+   "stock market investment strategy",
+   0.3292
+  ],
+  [
+   "science",
+   3,
+   "Arabic grammar rules for verbs",
+   0.363
+  ],
+  [
+   "science",
+   4,
+   "quantum chromodynamics and quark confinement",
+   0.4125
+  ],
+  [
+   "science",
+   3,
+   "how to cook biryani",
+   0.3279
+  ],
+  [
+   "maths",
+   4,
+   "trigonometric identities",
+   0.4575
+  ],
+  [
+   "science",
+   4,
+   "organic chemistry reaction mechanisms",
+   0.4253
+  ]
+ ],
+ "summary": {
+  "in_min": 0.5231,
+  "in_mean": 0.5831466666666666,
+  "out_max": 0.5293,
+  "out_mean": 0.39137500000000003
+ }
+}
